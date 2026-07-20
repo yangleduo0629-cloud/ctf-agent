@@ -1,0 +1,64 @@
+name: Prepare Upstream Upgrade
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: Upstream component
+        required: true
+        type: choice
+        options:
+          - veria-ctf-agent
+          - pentestgpt
+          - hexstrike-ai
+      ref:
+        description: Branch, tag, or full commit SHA
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out product main and submodules
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: recursive
+      - name: Configure update branch
+        id: branch
+        env:
+          COMPONENT: ${{ inputs.component }}
+        run: |
+          branch="upstream/${COMPONENT}/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "name=$branch" >> "$GITHUB_OUTPUT"
+      - name: Prepare immutable revision update
+        run: |
+          python -m pip install uv==0.11.29
+          python scripts/prepare_upstream_update.py "${{ inputs.component }}" "${{ inputs.ref }}"
+      - name: Commit update before verification
+        run: >-
+          git commit -m "chore(upstream): update ${{ inputs.component }} to ${{ inputs.ref }}"
+      - name: Run source regression
+        run: python scripts/regression.py source
+      - name: Smoke-test updated independent environment
+        run: python scripts/upstream_env.py smoke "${{ inputs.component }}"
+      - name: Push update branch and open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.branch.outputs.name }}
+        run: |
+          git push --set-upstream origin "HEAD:${BRANCH}"
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore(upstream): update ${{ inputs.component }}" \
+            --body "Automated immutable pin update to \`${{ inputs.ref }}\`. Merge only after upstream-policy and environment smoke checks pass."

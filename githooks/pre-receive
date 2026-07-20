@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+zero=0000000000000000000000000000000000000000
+
+while read old new ref; do
+  [ "$ref" = "refs/heads/main" ] || continue
+  [ "$old" = "$zero" ] && continue
+
+  protected=$(git diff --name-only "$old" "$new" -- \
+    .gitmodules UPSTREAMS.lock.json THIRD_PARTY_NOTICES.md \
+    sbom/upstreams.cdx.json third_party/reuse.json \
+    upstream/hexstrike-ai upstream/pentestgpt)
+  [ -n "$protected" ] || continue
+
+  parent_count=$(git rev-list --parents -n 1 "$new" | awk '{print NF-1}')
+  if [ "$parent_count" -lt 2 ]; then
+    echo "Rejected: immutable upstream files may enter main only through a merge commit." >&2
+    exit 1
+  fi
+done
+
+exit 0

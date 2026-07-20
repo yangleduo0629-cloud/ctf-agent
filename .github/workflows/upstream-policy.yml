@@ -1,0 +1,66 @@
+name: Upstream Policy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upstream-policy:
+    name: upstream-policy
+    runs-on: ubuntu-latest
+    outputs:
+      upstream_changed: ${{ steps.changes.outputs.upstream_changed }}
+    steps:
+      - name: Check out immutable source graph
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Detect environment-relevant changes
+        id: changes
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if git diff --quiet "$BASE_SHA...HEAD" -- \
+            .gitmodules UPSTREAMS.lock.json pyproject.toml uv.lock \
+            upstream environments third_party/locks third_party/container-images.json; then
+            echo "upstream_changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "upstream_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Enforce upstream branch policy
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: python scripts/check_pr_policy.py
+      - name: Validate provenance, licenses, and SBOM
+        run: |
+          python -m pip install uv==0.11.29
+          python scripts/regression.py source
+
+  independent-environments:
+    name: environment-${{ matrix.component }}
+    needs: upstream-policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        component: [veria-ctf-agent, pentestgpt, hexstrike-ai]
+    steps:
+      - name: Check out immutable source graph
+        if: needs.upstream-policy.outputs.upstream_changed == 'true'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Build and smoke-test isolated environment
+        if: needs.upstream-policy.outputs.upstream_changed == 'true'
+        run: python scripts/upstream_env.py smoke ${{ matrix.component }}

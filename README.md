@@ -147,6 +147,29 @@ All settings can also be passed as environment variables or CLI flags.
 - `codex` CLI (for Codex solver/coordinator)
 - `claude` CLI (bundled with claude-agent-sdk)
 
+## Pinned Upstreams
+
+Veria, PentestGPT, and HexStrike are recorded at immutable Git commits in
+[`UPSTREAMS.lock.json`](UPSTREAMS.lock.json). Clone the full source graph and
+validate its provenance with:
+
+```bash
+git submodule update --init --recursive
+python scripts/upstream_guard.py verify
+python scripts/regression.py source
+```
+
+Each component also has an isolated container smoke test:
+
+```bash
+python scripts/upstream_env.py smoke veria-ctf-agent
+python scripts/upstream_env.py smoke pentestgpt
+python scripts/upstream_env.py smoke hexstrike-ai
+```
+
+License notices, SBOM generation, and the pull-request-only upgrade process are
+documented in [`docs/UPSTREAM_MAINTENANCE.md`](docs/UPSTREAM_MAINTENANCE.md).
+
 ## Acknowledgements
 
 - [es3n1n/Eruditus](https://github.com/es3n1n/Eruditus) — CTFd interaction and HTML helpers in `pull_challenges.py`

@@ -1,0 +1,8 @@
+[submodule "upstream/pentestgpt"]
+	path = upstream/pentestgpt
+	url = https://github.com/GreyDGL/PentestGPT.git
+	update = checkout
+[submodule "upstream/hexstrike-ai"]
+	path = upstream/hexstrike-ai
+	url = https://github.com/0x4m4/hexstrike-ai.git
+	update = checkout

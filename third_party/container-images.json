@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "components": [
+    {
+      "name": "python",
+      "registry": "docker.io/library/python",
+      "tag": "3.14.6-slim-bookworm",
+      "digest": "sha256:86f975aca15cf04a40b399eebede9aea7c82eae084d1f1a0a6ef6bcaae871a30",
+      "used_by": ["veria-ctf-agent"]
+    },
+    {
+      "name": "python",
+      "registry": "docker.io/library/python",
+      "tag": "3.12.11-slim-bookworm",
+      "digest": "sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+      "used_by": ["pentestgpt", "hexstrike-ai"]
+    }
+  ]
+}
