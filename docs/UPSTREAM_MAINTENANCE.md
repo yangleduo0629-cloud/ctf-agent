@@ -63,8 +63,8 @@ the `OpenAIModel` API used by that revision and fail the Veria CLI smoke test.
 2. Run `python scripts/prepare_upstream_update.py <component> <ref>`.
 3. Review the upstream diff, changed license text, dependency locks, and SBOM.
 4. Run `python scripts/regression.py source` and the component Docker smoke.
-5. Open a pull request. One approval and the `upstream-policy` check are
-   required. Merge commits are retained to preserve the upstream boundary.
+5. Open a pull request. All required policy and environment checks must pass.
+   Merge commits are retained to preserve the upstream boundary.
 
 The update script exits on `main` and `master`. The workflow
 `.github/workflows/upstream-upgrade.yml` creates only `upstream/*` branches and
@@ -72,5 +72,6 @@ opens pull requests; it never pushes the product default branch.
 
 Apply `.github/rulesets/main-protection.json` to the GitHub fork after its
 credentials are configured. The ruleset blocks direct default-branch updates,
-requires one approval, resolves review threads, and requires the
-`upstream-policy` status check.
+requires pull requests, resolves review threads, and requires all policy and
+environment status checks. Approval count is zero so a single-owner fork can
+merge after the automated gates pass.
