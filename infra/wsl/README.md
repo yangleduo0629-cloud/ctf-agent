@@ -30,8 +30,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 ```
 
 The script validates the VHDX path and writes a 10 GB memory, 12 CPU, 4 GB swap WSL2 profile with
-localhost forwarding. Idle VM shutdown is disabled so native Docker services stay available, while
-gradual memory reclaim remains enabled. The script then shuts WSL down so the profile applies.
+localhost forwarding and gradual memory reclaim. It then shuts WSL down so the profile applies.
 
 ## Install and deploy
 
@@ -57,6 +56,16 @@ Docker daemon; Compose passes standard proxy build arguments without writing the
 
 `deploy.sh` creates `infra/wsl/.env` with random local secrets and mode `0600`. The file is ignored by
 Git. It builds and starts PostgreSQL, Redis, FastAPI, React/Vite, and LiteLLM in one Compose project.
+
+After the initial deployment, start or stop the complete platform from Windows with one command:
+
+```powershell
+.\infra\wsl\host\Start-CtfPlatform.ps1
+.\infra\wsl\host\Stop-CtfPlatform.ps1
+```
+
+The start command keeps a hidden WSL client alive, waits for all container health checks, and prints
+the frontend and API URLs. This avoids WSL's default idle VM shutdown when no terminal is open.
 
 Only the following host bindings exist:
 

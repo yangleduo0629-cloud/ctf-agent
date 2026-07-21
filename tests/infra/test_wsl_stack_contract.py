@@ -63,3 +63,11 @@ def test_build_proxy_is_not_baked_into_images() -> None:
         args = services[service_name]["build"]["args"]
         assert set(args) == {"HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY"}
         assert args["HTTP_PROXY"] == "${HTTP_PROXY:-}"
+
+
+def test_windows_start_stop_lifecycle_is_present() -> None:
+    start_script = (INFRA / "host" / "Start-CtfPlatform.ps1").read_text(encoding="utf-8")
+    stop_script = (INFRA / "host" / "Stop-CtfPlatform.ps1").read_text(encoding="utf-8")
+    assert "sleep', 'infinity'" in start_script
+    assert "health-check.sh --skip-gpu" in start_script
+    assert "compose.yaml stop" in stop_script

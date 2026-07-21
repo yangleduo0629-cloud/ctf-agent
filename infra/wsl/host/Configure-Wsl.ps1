@@ -10,8 +10,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+$wslExe = Join-Path $env:SystemRoot 'System32\wsl.exe'
 
-$distributions = @(wsl.exe --list --quiet) -replace "`0", '' | ForEach-Object { $_.Trim() }
+$distributions = @(& $wslExe --list --quiet) -replace "`0", '' | ForEach-Object { $_.Trim() }
 if ($Distribution -notin $distributions) {
     throw "WSL distribution not found: $Distribution"
 }
@@ -32,7 +33,6 @@ swapFile=$swapFile
 localhostForwarding=true
 autoProxy=false
 dnsTunneling=true
-vmIdleTimeout=-1
 
 [experimental]
 autoMemoryReclaim=gradual
@@ -41,8 +41,8 @@ sparseVhd=true
 
 $configPath = Join-Path $HOME '.wslconfig'
 [System.IO.File]::WriteAllText($configPath, $config.TrimStart(), [System.Text.Encoding]::ASCII)
-wsl.exe --set-default $Distribution
-wsl.exe --shutdown
+& $wslExe --set-default $Distribution
+& $wslExe --shutdown
 
 Write-Host "Configured $Distribution"
 Write-Host "VHDX: $vhdx"

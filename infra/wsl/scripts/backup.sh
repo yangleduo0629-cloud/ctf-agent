@@ -32,7 +32,7 @@ tar --create --gzip --file "${DESTINATION}/files/platform-data.tar.gz" \
 
 jq -n \
   --arg created_at "${STAMP}" \
-  --arg git_commit "$(git -C /srv/ctf-platform/app rev-parse HEAD)" \
+  --arg git_commit "$(runuser -u ctf-platform -- git -C /srv/ctf-platform/app rev-parse HEAD)" \
   --arg distribution "Ubuntu-24.04" \
   '{schema_version: 1, created_at: $created_at, git_commit: $git_commit, distribution: $distribution}' \
   > "${DESTINATION}/metadata.json"
