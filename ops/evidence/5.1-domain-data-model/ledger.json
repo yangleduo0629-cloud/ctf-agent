@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
   "task": "5.1 domain data model",
-  "status": "in_progress",
-  "current_stage": "postgres-deployment-ready",
-  "checkpoint": "11 ORM entities, repository policy, Alembic revision, API integration, and local regressions passed",
+  "status": "complete",
+  "current_stage": "verified",
+  "checkpoint": "11 ORM entities, repository policy, Alembic revision, API integration, and PostgreSQL regressions passed",
   "schema_revision": "20260721_0001",
+  "verified_at": "2026-07-21T13:07:43.3369127+08:00",
   "local_verification": {
     "pytest": "17 passed",
     "ruff": "passed",
@@ -14,9 +15,18 @@
     "postgresql_offline_sql": "passed",
     "source_regression": "passed"
   },
-  "next_actions": [
-    "Apply revision 20260721_0001 to PostgreSQL 16.",
-    "Run the rollback-only repository round-trip probe.",
-    "Verify restart persistence and API schema health."
-  ]
+  "postgresql_verification": {
+    "product_revision": "20260721_0001",
+    "product_domain_tables": 11,
+    "repository_round_trip": "passed (transaction rolled back)",
+    "temporary_database_upgrade": "passed (11 domain tables)",
+    "temporary_database_downgrade": "passed (0 domain tables)",
+    "temporary_database_cleanup": "passed"
+  },
+  "runtime_verification": {
+    "readyz": "postgres, redis, storage, and schema revision ready",
+    "compose_services": "api, web, postgres, redis, and litellm healthy",
+    "health_check": "passed with --skip-gpu"
+  },
+  "next_actions": []
 }
