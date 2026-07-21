@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "task": "6.2 Docker Sandbox Runner",
+  "status": "complete",
+  "current_stage": "verified",
+  "verified_at": "2026-07-21T17:56:00.8459388+08:00",
+  "checkpoint": "bounded command and script execution, immutable inputs, output capture, artifact association, and deterministic cleanup passed",
+  "implementation_revision": "c3e4ea6bd0f5f790a770f565c59355ff01d1df34",
+  "schema_revision": "20260721_0003",
+  "local_verification": {
+    "pytest": "57 passed",
+    "ruff": "passed for full repository",
+    "ty": "passed for db, ingestion, orchestration, sandbox runner, and capture entrypoint",
+    "source_regression": "passed",
+    "credential_scan": "provided platform session absent from repository"
+  },
+  "runtime": {
+    "compose_services": "api, sandbox-runner, worker, web, postgres, redis, and litellm healthy",
+    "readyz": "postgres, redis, sandbox runner, artifacts, checkpoints, and sandbox staging ready",
+    "sandbox_image": "ctf-sandbox-runner:local",
+    "sandbox_image_id": "sha256:da524ee258e6fedd01732d4f043039370cb5f5b03b2b835e3e9c4cef7baa4c5f",
+    "base_image_digest": "sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+    "staging_filesystem": "/dev/sdd ext4",
+    "docker_socket_owner": "sandbox-runner service only",
+    "host_bindings": "API 127.0.0.1:8080 and web 127.0.0.1:3000 only"
+  },
+  "fixture": {
+    "challenge_id": "ed93d728-9cb0-413c-99cd-f5ed40186b46",
+    "solver_run_id": "35a7a09f-3138-4d3b-a4bd-c12a173d4807",
+    "input_sha256_before_and_after": "a32c833462f83ed678f7f32a18f8000847b93f98e1f7413900ddbe5225831b03",
+    "command_tool_call_id": "0693e0ce-5225-4752-af95-8ca73e2a8a55",
+    "python_tool_call_id": "5173ab6a-d545-48ac-912d-2b4cb0f5e89e",
+    "shell_tool_call_id": "71a2c6a9-f6ad-4e86-ad8c-ff612f29ec91",
+    "timeout_tool_call_id": "b450896d-240b-4665-a83b-e2ebe6aceb54",
+    "readonly_tool_call_id": "2161eb52-a9ea-49fc-a048-2095a50ae4c6",
+    "output_limit_tool_call_id": "0293b087-85fa-451e-b9f0-a1de88f2354c",
+    "python_artifact_id": "454e4300-3b59-45bb-9cfe-4c03fbd6d6ed",
+    "shell_artifact_id": "ac459b71-0047-47b1-86b3-11271474f67f"
+  },
+  "execution_verification": {
+    "command": "stdout, stderr, exit code 0, nested output artifact, LOG evidence, and FILE evidence passed",
+    "python": "argument handling, stdout, stderr, generated file, and artifact association passed",
+    "shell": "script execution, stdout, generated file, and artifact association passed",
+    "timeout": "1 second limit returned exit code 124, timed_out=true, and failed ToolCall",
+    "read_only_attachment": "write attempt returned read-only file system and original SHA-256 stayed unchanged",
+    "output_limit": "1048576 characters retained with stdout_truncated=true",
+    "idempotency": "same key and payload returned the same ToolCall with duplicate=true"
+  },
+  "applied_isolation": {
+    "memory_bytes": 201326592,
+    "nano_cpus": 750000000,
+    "pids_limit": 24,
+    "network_mode": "none",
+    "readonly_rootfs": true,
+    "cap_drop": ["ALL"],
+    "no_new_privileges": true,
+    "attachments_read_only": true,
+    "workspace_read_write": true
+  },
+  "cleanup_verification": {
+    "labeled_execution_containers_after_requests": 0,
+    "per_execution_staging_directories_after_requests": 0,
+    "injected_scripts_archived": false
+  },
+  "next_actions": []
+}
