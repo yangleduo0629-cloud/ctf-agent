@@ -70,6 +70,23 @@ class UpstreamContractTests(unittest.TestCase):
             ["UPSTREAMS.lock.json"],
         )
 
+    def test_upstream_container_inputs_are_included_in_build_context(self) -> None:
+        dockerignore = (ROOT / ".dockerignore").read_text(encoding="utf-8").splitlines()
+        required_includes = {
+            "!pyproject.toml",
+            "!uv.lock",
+            "!README.md",
+            "!third_party/locks/hexstrike-requirements.lock.txt",
+            "!upstream/hexstrike-ai/hexstrike_mcp.py",
+            "!upstream/hexstrike-ai/hexstrike_server.py",
+            "!upstream/pentestgpt/README.md",
+            "!upstream/pentestgpt/pyproject.toml",
+            "!upstream/pentestgpt/uv.lock",
+            "!upstream/pentestgpt/pentestgpt_legacy/**",
+            "!upstream/pentestgpt/unified_agent/**",
+        }
+        self.assertTrue(required_includes.issubset(dockerignore))
+
 
 if __name__ == "__main__":
     unittest.main()

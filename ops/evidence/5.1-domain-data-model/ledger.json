@@ -7,14 +7,15 @@
   "schema_revision": "20260721_0001",
   "verified_at": "2026-07-21T13:07:43.3369127+08:00",
   "local_verification": {
-    "pytest": "18 passed",
+    "pytest": "19 passed",
     "ruff": "passed",
     "ty": "passed",
     "pr_policy": "passed for feat/domain-data-model",
     "sqlite_upgrade_downgrade": "passed",
     "alembic_model_drift": "passed",
     "postgresql_offline_sql": "passed",
-    "source_regression": "passed"
+    "source_regression": "passed",
+    "upstream_environment_smoke": "veria-ctf-agent, pentestgpt, and hexstrike-ai passed"
   },
   "postgresql_verification": {
     "product_revision": "20260721_0001",
