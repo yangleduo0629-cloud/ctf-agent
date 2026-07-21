@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
   "task": "4.2 WSL foundation environment",
-  "status": "in_progress",
-  "current_stage": "install-ready",
-  "checkpoint": "distribution restored at the target VHDX path; reproducible WSL and Compose files passed static contract checks",
+  "status": "complete",
+  "current_stage": "verified",
+  "checkpoint": "all services, localhost access, host and container GPU, WSL restart persistence, and isolated backup restore verified",
+  "completed_at": "2026-07-21T04:22:43Z",
   "target": {
     "distribution": "Ubuntu-24.04",
     "vhdx": "F:\\WSL\\Ubuntu-24.04\\ext4.vhdx",
@@ -13,13 +14,13 @@
   "observed": {
     "distribution": "Ubuntu-24.04",
     "vhdx": "F:\\WSL\\Ubuntu-24.04\\ext4.vhdx",
-    "vhdx_bytes": 36101423104,
+    "vhdx_bytes": 40904949760,
     "host_memory_bytes": 16844886016,
     "host_logical_processors": 32,
     "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
     "gpu_driver": "576.88",
     "gpu_memory_mib": 8188,
-    "f_drive_free_bytes": 341096587264,
+    "f_drive_free_bytes": 329334722560,
     "distribution_release": "Ubuntu 24.04.4 LTS",
     "distribution_kernel": "6.18.33.2-microsoft-standard-WSL2",
     "root_filesystem": "/dev/sdd ext4",
@@ -43,8 +44,6 @@
     "Keep active source, databases, artifacts, checkpoints, and Docker data on WSL ext4.",
     "Use /mnt/f only for exports, compressed backups, and offline archives."
   ],
-  "next_actions": [
-    "Install the native toolchain, Docker Engine, Compose v2, and NVIDIA Container Toolkit.",
-    "Deploy and verify the service stack, persistence, and backup restore path."
-  ]
+  "result_evidence": "ops/evidence/4.2-wsl-bootstrap/verification.json",
+  "next_actions": []
 }
