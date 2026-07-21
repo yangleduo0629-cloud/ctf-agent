@@ -67,9 +67,10 @@ usermod -aG docker ctf-platform
 
 install -d -o ctf-platform -g ctf-platform -m 2770 \
   /srv/ctf-platform/app \
-  /srv/ctf-platform/data/artifacts \
-  /srv/ctf-platform/data/checkpoints \
   /srv/ctf-platform/models
+install -d -o ctf-platform -g 65532 -m 2770 \
+  /srv/ctf-platform/data/artifacts \
+  /srv/ctf-platform/data/checkpoints
 install -d -o 999 -g 999 -m 0750 \
   /srv/ctf-platform/data/postgres \
   /srv/ctf-platform/data/redis

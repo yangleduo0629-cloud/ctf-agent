@@ -11,6 +11,8 @@ dependencies = [
     "aiodocker",
     "claude-agent-sdk",
     "httpx",
+    "fastapi==0.116.1",
+    "python-multipart==0.0.32",
     "pyyaml",
     "rich",
     "click",

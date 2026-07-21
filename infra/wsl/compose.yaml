@@ -55,7 +55,14 @@ services:
       ASYNC_DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
       ARTIFACTS_DIR: /srv/ctf-platform/data/artifacts
+      ARTIFACT_MAX_SIZE_BYTES: ${ARTIFACT_MAX_SIZE_BYTES:-536870912}
       CHECKPOINTS_DIR: /srv/ctf-platform/data/checkpoints
+      CTFD_URL: ${CTFD_URL:-}
+      CTFD_TOKEN: ${CTFD_TOKEN:-}
+      CTFD_USERNAME: ${CTFD_USERNAME:-}
+      CTFD_PASSWORD: ${CTFD_PASSWORD:-}
+      CTFD_VERIFY_TLS: ${CTFD_VERIFY_TLS:-true}
+      CTFD_TIMEOUT_SECONDS: ${CTFD_TIMEOUT_SECONDS:-30}
     volumes:
       - /srv/ctf-platform/data/artifacts:/srv/ctf-platform/data/artifacts
       - /srv/ctf-platform/data/checkpoints:/srv/ctf-platform/data/checkpoints

@@ -40,6 +40,15 @@ def test_persistent_mounts_stay_on_wsl_ext4_paths() -> None:
     assert all(not volume.startswith("/mnt/") for volume in volumes)
 
 
+def test_api_storage_directories_are_writable_by_the_container_group() -> None:
+    bootstrap = (INFRA / "scripts" / "bootstrap.sh").read_text(encoding="utf-8")
+    deploy = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    application = (INFRA / "api" / "app" / "main.py").read_text(encoding="utf-8")
+    for script in (bootstrap, deploy):
+        assert "install -d -o ctf-platform -g 65532 -m 2770" in script
+    assert "path.is_dir() and os.access(path, os.W_OK)" in application
+
+
 def test_database_and_cache_use_internal_network() -> None:
     compose = load_compose()
     assert compose["networks"]["backend"]["internal"] is True
@@ -54,7 +63,11 @@ def test_secrets_are_runtime_variables() -> None:
     assert "${POSTGRES_PASSWORD}" in compose_text
     assert "${REDIS_PASSWORD}" in compose_text
     assert "${LITELLM_MASTER_KEY}" in compose_text
+    assert "${CTFD_TOKEN:-}" in compose_text
+    assert "${CTFD_PASSWORD:-}" in compose_text
     assert "REPLACE_WITH_RANDOM_HEX" in example_text
+    assert "CTFD_TOKEN=" in example_text
+    assert "CTFD_PASSWORD=" in example_text
     assert not (INFRA / ".env").exists()
 
 
@@ -63,9 +76,17 @@ def test_api_runs_migrations_before_startup() -> None:
     health_check = (INFRA / "scripts" / "health-check.sh").read_text(encoding="utf-8")
     requirements = (INFRA / "api" / "requirements.txt").read_text(encoding="utf-8")
     assert "alembic upgrade head && exec uvicorn" in dockerfile
-    assert 'schema_revision == "20260721_0002"' in health_check
+    assert "COPY backend/ingestion ./backend/ingestion" in dockerfile
+    assert 'schema_revision == "20260721_0003"' in health_check
+    assert "python-multipart==0.0.32" in requirements
     assert "websockets==16.1" in requirements
     assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
+
+
+def test_deploy_waits_for_the_configured_service_count() -> None:
+    deploy_script = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    assert "config --services | wc -l" in deploy_script
+    assert "running} -eq ${expected_services}" in deploy_script
 
 
 def compose_worker_command() -> list[str]:
