@@ -170,6 +170,9 @@ python scripts/upstream_env.py smoke hexstrike-ai
 License notices, SBOM generation, and the pull-request-only upgrade process are
 documented in [`docs/UPSTREAM_MAINTENANCE.md`](docs/UPSTREAM_MAINTENANCE.md).
 
+The persistent local and CTFd challenge import API is documented in
+[`docs/CHALLENGE_INGESTION.md`](docs/CHALLENGE_INGESTION.md).
+
 ## Acknowledgements
 
 - [es3n1n/Eruditus](https://github.com/es3n1n/Eruditus) — CTFd interaction and HTML helpers in `pull_challenges.py`

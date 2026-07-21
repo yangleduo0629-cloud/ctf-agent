@@ -10,6 +10,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from redis.asyncio import from_url as redis_from_url
 
 from backend.db.session import create_database_engine, create_session_factory
+from backend.ingestion.api import IngestionRuntime
+from backend.ingestion.api import router as ingestion_router
+from backend.ingestion.services import ChallengeCatalog
+from backend.ingestion.storage import ArtifactStorage
 from backend.orchestration.api import OrchestrationRuntime
 from backend.orchestration.api import router as orchestration_router
 from backend.orchestration.redis_transport import EventRelay
@@ -24,6 +28,15 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     stop = asyncio.Event()
     relay_task = asyncio.create_task(relay.run(stop))
     application.state.orchestration = OrchestrationRuntime(redis, session_factory, relay)
+    application.state.ingestion = IngestionRuntime(
+        ChallengeCatalog(
+            session_factory,
+            ArtifactStorage(
+                Path(os.environ["ARTIFACTS_DIR"]),
+                max_size_bytes=int(os.environ.get("ARTIFACT_MAX_SIZE_BYTES", "536870912")),
+            ),
+        )
+    )
     try:
         yield
     finally:
@@ -35,6 +48,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(title="CTF Platform API", version="0.2.0", lifespan=lifespan)
 app.include_router(orchestration_router)
+app.include_router(ingestion_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:3000", "http://localhost:3000"],

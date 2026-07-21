@@ -67,6 +67,18 @@ class Competition(RecordMixin, Base):
     starts_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     ends_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     details: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
+    flag_format: Mapped[str] = mapped_column(
+        String(128),
+        nullable=False,
+        default="flag{...}",
+        server_default="flag{...}",
+    )
+    flag_regex: Mapped[str] = mapped_column(
+        String(512),
+        nullable=False,
+        default=r"^flag\{[^}\r\n]+\}$",
+        server_default=r"^flag\{[^}\r\n]+\}$",
+    )
 
     challenges: Mapped[list[Challenge]] = relationship(back_populates="competition")
     eval_runs: Mapped[list[EvalRun]] = relationship(back_populates="competition")
@@ -82,6 +94,10 @@ class Challenge(RecordMixin, Base):
             name="uq_challenges_competition_external_id",
         ),
         Index("ix_challenges_competition_status", "competition_id", "status"),
+        CheckConstraint(
+            "service_port IS NULL OR (service_port >= 1 AND service_port <= 65535)",
+            name="service_port_range",
+        ),
     )
 
     competition_id: Mapped[uuid.UUID] = mapped_column(
@@ -95,6 +111,9 @@ class Challenge(RecordMixin, Base):
     description: Mapped[str] = mapped_column(Text, nullable=False, default="")
     points: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     connection_info: Mapped[str | None] = mapped_column(Text)
+    service_protocol: Mapped[str | None] = mapped_column(String(32))
+    service_host: Mapped[str | None] = mapped_column(String(255))
+    service_port: Mapped[int | None] = mapped_column(Integer)
     status: Mapped[ChallengeStatus] = mapped_column(
         enum_column(ChallengeStatus, "challenge_status"),
         nullable=False,
@@ -138,6 +157,7 @@ class Artifact(RecordMixin, Base):
     )
     retain_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     purged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    source_url: Mapped[str | None] = mapped_column(String(2048))
     details: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
 
     challenge: Mapped[Challenge] = relationship(back_populates="artifacts")

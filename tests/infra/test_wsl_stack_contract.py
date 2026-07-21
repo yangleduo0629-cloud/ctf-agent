@@ -54,7 +54,11 @@ def test_secrets_are_runtime_variables() -> None:
     assert "${POSTGRES_PASSWORD}" in compose_text
     assert "${REDIS_PASSWORD}" in compose_text
     assert "${LITELLM_MASTER_KEY}" in compose_text
+    assert "${CTFD_TOKEN:-}" in compose_text
+    assert "${CTFD_PASSWORD:-}" in compose_text
     assert "REPLACE_WITH_RANDOM_HEX" in example_text
+    assert "CTFD_TOKEN=" in example_text
+    assert "CTFD_PASSWORD=" in example_text
     assert not (INFRA / ".env").exists()
 
 
@@ -63,7 +67,9 @@ def test_api_runs_migrations_before_startup() -> None:
     health_check = (INFRA / "scripts" / "health-check.sh").read_text(encoding="utf-8")
     requirements = (INFRA / "api" / "requirements.txt").read_text(encoding="utf-8")
     assert "alembic upgrade head && exec uvicorn" in dockerfile
-    assert 'schema_revision == "20260721_0002"' in health_check
+    assert "COPY backend/ingestion ./backend/ingestion" in dockerfile
+    assert 'schema_revision == "20260721_0003"' in health_check
+    assert "python-multipart==0.0.32" in requirements
     assert "websockets==16.1" in requirements
     assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
 
