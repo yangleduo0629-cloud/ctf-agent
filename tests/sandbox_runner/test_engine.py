@@ -54,7 +54,7 @@ def test_container_config_enforces_isolation_and_limits(tmp_path: Path) -> None:
     assert host["Memory"] == host["MemorySwap"] == 256 * 1024 * 1024
     assert host["NanoCpus"] == 1_500_000_000
     assert host["PidsLimit"] == 32
-    assert host["LogConfig"]["Config"] == {"max-size": "2m", "max-file": "2"}
+    assert host["LogConfig"] == {"Type": "none", "Config": {}}
     assert f"{attachments}:/attachments:ro" in host["Binds"]
     assert f"{workspace}:/workspace:rw" in host["Binds"]
 
@@ -92,7 +92,8 @@ def test_prepare_execution_isolates_read_only_attachments_and_script(tmp_path: P
 
     mounted = attachments / "input.txt"
     assert mounted.read_text(encoding="utf-8") == "original"
-    assert command[:2] == ["/usr/local/bin/python", "/workspace/.runner/task.py"]
+    assert command[:2] == ["/usr/local/bin/python", "/usr/local/bin/runner-entrypoint"]
+    assert command[-2:] == ["/usr/local/bin/python", "/workspace/.runner/task.py"]
     assert (workspace / ".runner" / "task.py").read_text(encoding="utf-8") == "print('ok')"
 
     runner.cleanup_execution(request.challenge_id, request.execution_id)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import shutil
 import time
@@ -81,6 +82,8 @@ class DockerSandboxRunner:
         exit_code = -1
         stdout = ""
         stderr = ""
+        stdout_truncated = False
+        stderr_truncated = False
         container_id = ""
         archive_error: str | None = None
         applied_config: AppliedSandboxConfig | None = None
@@ -103,8 +106,12 @@ class DockerSandboxRunner:
                 await container.kill()
                 await container.wait()
 
-            stdout = "".join(await container.log(stdout=True, stderr=False))
-            stderr = "".join(await container.log(stdout=False, stderr=True))
+            (
+                stdout,
+                stderr,
+                stdout_truncated,
+                stderr_truncated,
+            ) = await asyncio.to_thread(self._read_captured_output, workspace_dir)
             await asyncio.to_thread(self._remove_internal_files, workspace_dir)
             try:
                 generated_files = await asyncio.to_thread(
@@ -121,8 +128,6 @@ class DockerSandboxRunner:
                     pass
             await docker.close()
 
-        stdout, stdout_truncated = _truncate_utf8(stdout, self.max_output_bytes)
-        stderr, stderr_truncated = _truncate_utf8(stderr, self.max_output_bytes)
         return RunnerExecutionResponse(
             execution_id=request.execution_id,
             container_id=container_id[:12],
@@ -181,8 +186,8 @@ class DockerSandboxRunner:
                 "PidsLimit": request.limits.pids_limit,
                 "OomKillDisable": False,
                 "LogConfig": {
-                    "Type": "local",
-                    "Config": {"max-size": "2m", "max-file": "2"},
+                    "Type": "none",
+                    "Config": {},
                 },
                 "Ulimits": [
                     {"Name": "nofile", "Soft": 1024, "Hard": 1024},
@@ -255,22 +260,46 @@ class DockerSandboxRunner:
             _set_owner(destination)
         return execution_root, attachments_dir, workspace_dir
 
-    @staticmethod
-    def _command(request: RunnerExecutionRequest, workspace_dir: Path) -> list[str]:
-        if request.mode == SandboxExecutionMode.COMMAND:
-            return ["/bin/sh", "-c", request.command or ""]
-
+    def _command(self, request: RunnerExecutionRequest, workspace_dir: Path) -> list[str]:
         internal_dir = workspace_dir / ".runner"
         internal_dir.mkdir()
         _set_directory_access(internal_dir, 0o700)
-        suffix = "py" if request.mode == SandboxExecutionMode.PYTHON else "sh"
-        script_path = internal_dir / f"task.{suffix}"
-        script_path.write_text(request.script or "", encoding="utf-8", newline="\n")
-        script_path.chmod(0o500)
-        _set_owner(script_path)
-        container_path = f"/workspace/.runner/task.{suffix}"
-        interpreter = "/usr/local/bin/python" if suffix == "py" else "/bin/sh"
-        return [interpreter, container_path, *request.args]
+        if request.mode == SandboxExecutionMode.COMMAND:
+            child_command = ["/bin/sh", "-c", request.command or ""]
+        else:
+            suffix = "py" if request.mode == SandboxExecutionMode.PYTHON else "sh"
+            script_path = internal_dir / f"task.{suffix}"
+            script_path.write_text(request.script or "", encoding="utf-8", newline="\n")
+            script_path.chmod(0o500)
+            _set_owner(script_path)
+            container_path = f"/workspace/.runner/task.{suffix}"
+            interpreter = "/usr/local/bin/python" if suffix == "py" else "/bin/sh"
+            child_command = [interpreter, container_path, *request.args]
+        return [
+            "/usr/local/bin/python",
+            "/usr/local/bin/runner-entrypoint",
+            "--capture-dir",
+            "/workspace/.runner",
+            "--limit",
+            str(self.max_output_bytes),
+            "--",
+            *child_command,
+        ]
+
+    def _read_captured_output(self, workspace_dir: Path) -> tuple[str, str, bool, bool]:
+        capture_dir = workspace_dir / ".runner"
+        stdout_bytes = _read_bounded(capture_dir / "stdout.bin", self.max_output_bytes)
+        stderr_bytes = _read_bounded(capture_dir / "stderr.bin", self.max_output_bytes)
+        metadata_path = capture_dir / "capture.json"
+        metadata: dict[str, Any] = {}
+        if metadata_path.is_file():
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        return (
+            stdout_bytes.decode("utf-8", errors="replace"),
+            stderr_bytes.decode("utf-8", errors="replace"),
+            bool(metadata.get("stdout_truncated", len(stdout_bytes) >= self.max_output_bytes)),
+            bool(metadata.get("stderr_truncated", len(stderr_bytes) >= self.max_output_bytes)),
+        )
 
     @staticmethod
     def _remove_internal_files(workspace_dir: Path) -> None:
@@ -297,11 +326,11 @@ def _set_owner(path: Path) -> None:
         os.chown(path, CONTAINER_UID, CONTAINER_GID)
 
 
-def _truncate_utf8(value: str, max_bytes: int) -> tuple[str, bool]:
-    encoded = value.encode("utf-8", errors="replace")
-    if len(encoded) <= max_bytes:
-        return value, False
-    return encoded[:max_bytes].decode("utf-8", errors="ignore"), True
+def _read_bounded(path: Path, max_bytes: int) -> bytes:
+    if not path.is_file():
+        return b""
+    with path.open("rb") as stream:
+        return stream.read(max_bytes)
 
 
 def _applied_config(info: dict[str, Any]) -> AppliedSandboxConfig:

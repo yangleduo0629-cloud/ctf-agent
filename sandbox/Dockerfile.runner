@@ -5,6 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     HOME=/tmp
 
 RUN useradd --uid 65532 --user-group --no-create-home --shell /usr/sbin/nologin sandbox
+COPY --chmod=0555 sandbox/runner_entrypoint.py /usr/local/bin/runner-entrypoint
 
 WORKDIR /workspace
 USER 65532:65532

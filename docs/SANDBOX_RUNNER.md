@@ -73,7 +73,7 @@ The execution container uses the pinned `python:3.12.11-slim-bookworm` base and 
 - all Linux capabilities dropped;
 - `no-new-privileges`;
 - CPU, memory, equal memory/swap, PID, file descriptor, and core dump limits;
-- bounded local Docker logs;
+- bounded in-container stdout/stderr capture with Docker logs disabled;
 - forced container deletion after success, non-zero exit, timeout, or transport failure.
 
 The public API container has no Docker socket. A dedicated Compose-internal service owns the socket
