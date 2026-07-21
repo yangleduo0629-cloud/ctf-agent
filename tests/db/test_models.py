@@ -69,7 +69,7 @@ def test_complete_domain_graph_round_trip(session: Session) -> None:
             name="Cold Coffee",
             category="web",
             points=500,
-            status=ChallengeStatus.ACTIVE,
+            status=ChallengeStatus.SOLVING,
         )
     )
     artifact = repositories.artifacts.add(

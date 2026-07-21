@@ -18,6 +18,7 @@ dependencies = [
     "sqlalchemy==2.0.51",
     "alembic==1.18.5",
     "psycopg[binary]==3.3.4",
+    "redis==6.2.0",
 ]
 
 [project.scripts]

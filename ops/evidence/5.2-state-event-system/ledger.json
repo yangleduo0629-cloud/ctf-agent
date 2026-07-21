@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task": "5.2 state machine and event system",
+  "status": "complete",
+  "current_stage": "verified",
+  "schema_revision": "20260721_0002",
+  "verified_at": "2026-07-21T14:13:35.9394877+08:00",
+  "checkpoint": "state transactions, immutable events, Redis recovery, WebSocket replay, and restart regressions passed",
+  "local_verification": {
+    "pytest": "25 passed",
+    "ruff": "passed",
+    "ty": "passed",
+    "sqlite_upgrade_downgrade": "passed",
+    "alembic_model_drift": "passed",
+    "postgresql_offline_sql": "passed",
+    "source_regression": "passed"
+  },
+  "postgresql_verification": {
+    "product_revision": "20260721_0002",
+    "temporary_database_upgrade": "passed",
+    "temporary_database_downgrade": "passed (0 target tables)",
+    "domain_event_update_guard": "passed"
+  },
+  "redis_recovery_verification": {
+    "crash_window": "database committed before ACK",
+    "pending_before_restart": 1,
+    "pending_after_restart": 0,
+    "reclaimed_idempotently": true,
+    "duplicate_event_count": 1,
+    "distributed_lock": "passed",
+    "database_to_redis_event_count": "3/3 in isolated probe"
+  },
+  "runtime_verification": {
+    "api_restart": "passed",
+    "worker_restart": "passed",
+    "websocket_replay": "passed at sequence 1",
+    "websocket_live_publish": "passed at sequence 2",
+    "checkpoint_create_restore": "passed with SHA-256 verification",
+    "compose_services": "api, worker, web, postgres, redis, and litellm healthy"
+  },
+  "next_actions": []
+}
