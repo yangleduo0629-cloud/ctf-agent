@@ -166,6 +166,7 @@ class ChallengeCatalog:
         idempotency_key: str,
         declared_content_type: str | None = None,
         source_url: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> ArtifactIngestionResult:
         with source_path.open("rb") as source:
             stored = self.storage.store_fileobj(
@@ -179,6 +180,7 @@ class ChallengeCatalog:
             stored,
             idempotency_key=idempotency_key,
             source_url=source_url,
+            details=details,
         )
 
     def add_artifact_fileobj(
@@ -190,6 +192,7 @@ class ChallengeCatalog:
         idempotency_key: str,
         declared_content_type: str | None = None,
         source_url: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> ArtifactIngestionResult:
         stored = self.storage.store_fileobj(
             challenge_id,
@@ -202,6 +205,7 @@ class ChallengeCatalog:
             stored,
             idempotency_key=idempotency_key,
             source_url=source_url,
+            details=details,
         )
 
     def record_stored_artifact(
@@ -211,6 +215,7 @@ class ChallengeCatalog:
         *,
         idempotency_key: str,
         source_url: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> ArtifactIngestionResult:
         try:
             with session_scope(self.session_factory) as session:
@@ -271,6 +276,7 @@ class ChallengeCatalog:
                     size_bytes=stored.size_bytes,
                     sha256=stored.sha256,
                     source_url=source_url,
+                    details=details or {},
                 )
                 session.add(artifact)
                 challenge.updated_at = utc_now()

@@ -173,6 +173,9 @@ documented in [`docs/UPSTREAM_MAINTENANCE.md`](docs/UPSTREAM_MAINTENANCE.md).
 The persistent local and CTFd challenge import API is documented in
 [`docs/CHALLENGE_INGESTION.md`](docs/CHALLENGE_INGESTION.md).
 
+The disposable command and script execution service is documented in
+[`docs/SANDBOX_RUNNER.md`](docs/SANDBOX_RUNNER.md).
+
 ## Acknowledgements
 
 - [es3n1n/Eruditus](https://github.com/es3n1n/Eruditus) — CTFd interaction and HTML helpers in `pull_challenges.py`

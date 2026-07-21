@@ -31,6 +31,9 @@ LOCAL_MODEL_API_BASE=http://host.docker.internal:8001/v1
 LOCAL_MODEL_API_KEY=local-model-placeholder
 EOF
 fi
+if ! grep -q '^SANDBOX_RUNNER_TOKEN=' "${ENV_FILE}"; then
+  printf 'SANDBOX_RUNNER_TOKEN=%s\n' "$(openssl rand -hex 32)" >> "${ENV_FILE}"
+fi
 chmod 0600 "${ENV_FILE}"
 
 install -d -o 999 -g 999 -m 0750 \
@@ -38,7 +41,8 @@ install -d -o 999 -g 999 -m 0750 \
   /srv/ctf-platform/data/redis
 install -d -o ctf-platform -g 65532 -m 2770 \
   /srv/ctf-platform/data/artifacts \
-  /srv/ctf-platform/data/checkpoints
+  /srv/ctf-platform/data/checkpoints \
+  /srv/ctf-platform/data/sandboxes
 install -d -o ctf-platform -g ctf-platform -m 2770 \
   /srv/ctf-platform/models
 
@@ -46,6 +50,10 @@ docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" config --quiet
 expected_services=$(
   docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" config --services | wc -l
 )
+docker build --pull \
+  --file "${INFRA_DIR}/../../sandbox/Dockerfile.runner" \
+  --tag ctf-sandbox-runner:local \
+  "${INFRA_DIR}/../.."
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" build --pull
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" up --detach --remove-orphans
 

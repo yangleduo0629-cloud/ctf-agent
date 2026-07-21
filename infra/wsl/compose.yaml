@@ -63,15 +63,21 @@ services:
       CTFD_PASSWORD: ${CTFD_PASSWORD:-}
       CTFD_VERIFY_TLS: ${CTFD_VERIFY_TLS:-true}
       CTFD_TIMEOUT_SECONDS: ${CTFD_TIMEOUT_SECONDS:-30}
+      SANDBOX_RUNNER_URL: http://sandbox-runner:8090
+      SANDBOX_RUNNER_TOKEN: ${SANDBOX_RUNNER_TOKEN}
+      SANDBOX_WORK_ROOT: /srv/ctf-platform/data/sandboxes
     volumes:
       - /srv/ctf-platform/data/artifacts:/srv/ctf-platform/data/artifacts
       - /srv/ctf-platform/data/checkpoints:/srv/ctf-platform/data/checkpoints
+      - /srv/ctf-platform/data/sandboxes:/srv/ctf-platform/data/sandboxes
     ports:
       - "127.0.0.1:8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      sandbox-runner:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=3)"]
@@ -81,6 +87,39 @@ services:
       start_period: 10s
     networks:
       - edge
+      - backend
+
+  sandbox-runner:
+    image: ctf-platform-api:local
+    pull_policy: never
+    user: "0:0"
+    restart: unless-stopped
+    environment:
+      ARTIFACTS_DIR: /srv/ctf-platform/data/artifacts
+      SANDBOX_WORK_ROOT: /srv/ctf-platform/data/sandboxes
+      SANDBOX_IMAGE: ctf-sandbox-runner:local
+      SANDBOX_RUNNER_TOKEN: ${SANDBOX_RUNNER_TOKEN}
+      SANDBOX_MAX_OUTPUT_BYTES: ${SANDBOX_MAX_OUTPUT_BYTES:-1048576}
+      SANDBOX_MAX_ARCHIVE_BYTES: ${SANDBOX_MAX_ARCHIVE_BYTES:-268435456}
+      SANDBOX_MAX_ARCHIVE_FILES: ${SANDBOX_MAX_ARCHIVE_FILES:-100}
+    command:
+      - uvicorn
+      - app.sandbox_main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8090"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/ctf-platform/data/artifacts:/srv/ctf-platform/data/artifacts:ro
+      - /srv/ctf-platform/data/sandboxes:/srv/ctf-platform/data/sandboxes
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/healthz', timeout=5)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
       - backend
 
   worker:
