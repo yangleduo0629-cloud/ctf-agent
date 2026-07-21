@@ -37,6 +37,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=${KEYRING_DIR}/nodesource
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
   | gpg --dearmor --yes -o "${KEYRING_DIR}/docker.gpg"
 chmod a+r "${KEYRING_DIR}/docker.gpg"
+# shellcheck disable=SC1091
 . /etc/os-release
 echo "deb [arch=$(dpkg --print-architecture) signed-by=${KEYRING_DIR}/docker.gpg] https://download.docker.com/linux/ubuntu ${VERSION_CODENAME} stable" \
   > /etc/apt/sources.list.d/docker.list

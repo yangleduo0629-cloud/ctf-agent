@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly INFRA_DIR
 readonly ENV_FILE="${INFRA_DIR}/.env"
 readonly COMPOSE_FILE="${INFRA_DIR}/compose.yaml"
 

@@ -2,7 +2,8 @@
 set -euo pipefail
 
 readonly TOKEN="${1:?usage: verify-fixture.sh TOKEN}"
-readonly INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly INFRA_DIR
 readonly ENV_FILE="${INFRA_DIR}/.env"
 readonly COMPOSE=(docker compose --env-file "${ENV_FILE}" -f "${INFRA_DIR}/compose.yaml")
 

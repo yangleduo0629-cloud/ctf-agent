@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly INFRA_DIR
 readonly ENV_FILE="${INFRA_DIR}/.env"
 readonly COMPOSE=(docker compose --env-file "${ENV_FILE}" -f "${INFRA_DIR}/compose.yaml")
 readonly BACKUP_ROOT="${BACKUP_ROOT:-/mnt/f/CTF-Agent-Backups/ctf-platform}"
-readonly STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+readonly STAMP
 readonly DESTINATION="${BACKUP_ROOT}/${STAMP}"
 
 case "${BACKUP_ROOT}" in
@@ -34,11 +36,13 @@ jq -n \
   --arg distribution "Ubuntu-24.04" \
   '{schema_version: 1, created_at: $created_at, git_commit: $git_commit, distribution: $distribution}' \
   > "${DESTINATION}/metadata.json"
+checksums_tmp=$(mktemp)
 (
   cd "${DESTINATION}"
   find . -type f ! -name SHA256SUMS -print0 \
     | sort -z \
-    | xargs -0 sha256sum > SHA256SUMS
+    | xargs -0 sha256sum > "${checksums_tmp}"
 )
+mv "${checksums_tmp}" "${DESTINATION}/SHA256SUMS"
 touch "${DESTINATION}/backup.complete"
 echo "${DESTINATION}"

@@ -3,7 +3,8 @@ set -euo pipefail
 
 readonly BACKUP_DIR="${1:?usage: restore-verify.sh BACKUP_DIR TOKEN}"
 readonly TOKEN="${2:?usage: restore-verify.sh BACKUP_DIR TOKEN}"
-readonly INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly INFRA_DIR
 readonly ENV_FILE="${INFRA_DIR}/.env"
 readonly COMPOSE=(docker compose --env-file "${ENV_FILE}" -f "${INFRA_DIR}/compose.yaml")
 readonly RESTORE_DB="ctf_restore_verify"

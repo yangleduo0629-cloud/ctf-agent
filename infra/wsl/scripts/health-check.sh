@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly INFRA_DIR
 readonly ENV_FILE="${INFRA_DIR}/.env"
 readonly COMPOSE=(docker compose --env-file "${ENV_FILE}" -f "${INFRA_DIR}/compose.yaml")
 readonly GPU_IMAGE="${GPU_TEST_IMAGE:-nvidia/cuda:12.8.1-base-ubuntu24.04}"
