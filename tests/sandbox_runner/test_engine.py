@@ -10,7 +10,11 @@ from backend.sandbox_runner.contracts import (
     SandboxExecutionMode,
     SandboxLimits,
 )
-from backend.sandbox_runner.engine import ArchiveLimitError, DockerSandboxRunner
+from backend.sandbox_runner.engine import (
+    ArchiveLimitError,
+    DockerSandboxRunner,
+    _applied_config,
+)
 
 
 def test_container_config_enforces_isolation_and_limits(tmp_path: Path) -> None:
@@ -121,3 +125,32 @@ def test_generated_file_collection_skips_symlinks_and_enforces_limits(tmp_path: 
     (workspace / "third.txt").write_text("x", encoding="utf-8")
     with pytest.raises(ArchiveLimitError, match="file limit"):
         runner.collect_generated_files(workspace)
+
+
+def test_applied_config_is_derived_from_docker_inspect() -> None:
+    applied = _applied_config(
+        {
+            "HostConfig": {
+                "Memory": 134217728,
+                "NanoCpus": 500000000,
+                "PidsLimit": 32,
+                "NetworkMode": "none",
+                "ReadonlyRootfs": True,
+                "CapDrop": ["ALL"],
+                "SecurityOpt": ["no-new-privileges:true"],
+            },
+            "Mounts": [
+                {"Destination": "/attachments", "RW": False},
+                {"Destination": "/workspace", "RW": True},
+            ],
+        }
+    )
+    assert applied.memory_bytes == 134217728
+    assert applied.nano_cpus == 500000000
+    assert applied.pids_limit == 32
+    assert applied.network_mode == "none"
+    assert applied.readonly_rootfs
+    assert applied.cap_drop == ["ALL"]
+    assert applied.no_new_privileges
+    assert applied.attachments_read_only
+    assert applied.workspace_read_write

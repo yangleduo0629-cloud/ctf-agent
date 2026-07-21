@@ -73,6 +73,18 @@ class GeneratedFile(BaseModel):
     size_bytes: int
 
 
+class AppliedSandboxConfig(BaseModel):
+    memory_bytes: int
+    nano_cpus: int
+    pids_limit: int
+    network_mode: str
+    readonly_rootfs: bool
+    cap_drop: list[str]
+    no_new_privileges: bool
+    attachments_read_only: bool
+    workspace_read_write: bool
+
+
 class RunnerExecutionResponse(BaseModel):
     execution_id: uuid.UUID
     container_id: str
@@ -85,3 +97,4 @@ class RunnerExecutionResponse(BaseModel):
     duration_ms: int
     generated_files: list[GeneratedFile]
     archive_error: str | None = None
+    applied_config: AppliedSandboxConfig | None = None

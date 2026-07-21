@@ -11,6 +11,7 @@ import aiodocker
 
 from backend.ingestion.storage import safe_filename
 from backend.sandbox_runner.contracts import (
+    AppliedSandboxConfig,
     GeneratedFile,
     RunnerExecutionRequest,
     RunnerExecutionResponse,
@@ -82,12 +83,14 @@ class DockerSandboxRunner:
         stderr = ""
         container_id = ""
         archive_error: str | None = None
+        applied_config: AppliedSandboxConfig | None = None
         generated_files: list[GeneratedFile] = []
         try:
             await self._remove_stale_container(docker, container_name)
             container = await docker.containers.create(config, name=container_name)
             container_id = container.id
             await container.start()
+            applied_config = _applied_config(await container.show())
             try:
                 wait_result = await asyncio.wait_for(
                     container.wait(),
@@ -132,6 +135,7 @@ class DockerSandboxRunner:
             duration_ms=round((time.monotonic() - started) * 1000),
             generated_files=generated_files,
             archive_error=archive_error,
+            applied_config=applied_config,
         )
 
     def execution_root(self, challenge_id, execution_id) -> Path:
@@ -298,6 +302,31 @@ def _truncate_utf8(value: str, max_bytes: int) -> tuple[str, bool]:
     if len(encoded) <= max_bytes:
         return value, False
     return encoded[:max_bytes].decode("utf-8", errors="ignore"), True
+
+
+def _applied_config(info: dict[str, Any]) -> AppliedSandboxConfig:
+    host = info.get("HostConfig", {})
+    mounts = info.get("Mounts", [])
+    attachments = next(
+        (mount for mount in mounts if mount.get("Destination") == "/attachments"),
+        {},
+    )
+    workspace = next(
+        (mount for mount in mounts if mount.get("Destination") == "/workspace"),
+        {},
+    )
+    security_options = [str(item) for item in host.get("SecurityOpt") or []]
+    return AppliedSandboxConfig(
+        memory_bytes=int(host.get("Memory") or 0),
+        nano_cpus=int(host.get("NanoCpus") or 0),
+        pids_limit=int(host.get("PidsLimit") or 0),
+        network_mode=str(host.get("NetworkMode") or ""),
+        readonly_rootfs=bool(host.get("ReadonlyRootfs")),
+        cap_drop=[str(item) for item in host.get("CapDrop") or []],
+        no_new_privileges=any("no-new-privileges" in item for item in security_options),
+        attachments_read_only=attachments.get("RW") is False,
+        workspace_read_write=workspace.get("RW") is True,
+    )
 
 
 def _remove_tree(path: Path) -> None:

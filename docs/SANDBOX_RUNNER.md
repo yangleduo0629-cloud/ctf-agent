@@ -42,6 +42,8 @@ Python script:
 Shell script uses `"mode": "shell"` and the same `script` and `args` fields. The response contains
 the ToolCall ID, sequence, status, stdout, stderr, exit code, timeout state, duration, truncation
 state, and archived output artifacts. Replaying the same key and payload returns the stored result.
+The response also includes the Docker-inspected memory, CPU, PID, network, capability, root
+filesystem, and mount access settings that were applied to the execution container.
 
 ## Filesystem contract
 

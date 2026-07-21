@@ -12,7 +12,11 @@ from backend.ingestion.api import ArtifactResponse
 from backend.orchestration.event_store import IdempotencyConflictError
 from backend.orchestration.redis_transport import LockUnavailableError
 from backend.sandbox_runner.client import RunnerUnavailableError
-from backend.sandbox_runner.contracts import SandboxExecuteRequest, SandboxExecutionMode
+from backend.sandbox_runner.contracts import (
+    AppliedSandboxConfig,
+    SandboxExecuteRequest,
+    SandboxExecutionMode,
+)
 from backend.sandbox_runner.services import SandboxExecutionResult, SandboxExecutionService
 
 router = APIRouter(prefix="/api", tags=["sandbox-runner"])
@@ -46,6 +50,7 @@ class SandboxExecutionResponse(BaseModel):
     timed_out: bool
     duration_ms: int
     archive_error: str | None
+    applied_config: AppliedSandboxConfig | None
     outputs: list[SandboxOutputResponse]
     duplicate: bool
 
@@ -101,6 +106,7 @@ def _response(result: SandboxExecutionResult) -> SandboxExecutionResponse:
         timed_out=result.runner_result.timed_out,
         duration_ms=result.runner_result.duration_ms,
         archive_error=result.runner_result.archive_error,
+        applied_config=result.runner_result.applied_config,
         outputs=[
             SandboxOutputResponse(
                 relative_path=output.relative_path,
