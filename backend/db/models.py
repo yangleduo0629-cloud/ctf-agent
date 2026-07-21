@@ -8,6 +8,7 @@ from typing import Any
 
 from sqlalchemy import (
     JSON,
+    BigInteger,
     CheckConstraint,
     DateTime,
     Enum,
@@ -18,6 +19,8 @@ from sqlalchemy import (
     String,
     Text,
     UniqueConstraint,
+    Uuid,
+    event,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -95,7 +98,7 @@ class Challenge(RecordMixin, Base):
     status: Mapped[ChallengeStatus] = mapped_column(
         enum_column(ChallengeStatus, "challenge_status"),
         nullable=False,
-        default=ChallengeStatus.PENDING,
+        default=ChallengeStatus.NEW,
     )
     details: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
 
@@ -191,6 +194,7 @@ class Checkpoint(RecordMixin, Base):
     sequence: Mapped[int] = mapped_column(Integer, nullable=False)
     storage_key: Mapped[str | None] = mapped_column(String(1024))
     state: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
+    checksum: Mapped[str | None] = mapped_column(String(64))
 
     solver_run: Mapped[SolverRun] = relationship(back_populates="checkpoints")
 
@@ -380,3 +384,60 @@ class EvalRun(RecordMixin, Base):
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     competition: Mapped[Competition] = relationship(back_populates="eval_runs")
+
+
+class DomainEvent(Base):
+    __tablename__ = "domain_events"
+    __table_args__ = (
+        UniqueConstraint("id", name="uq_domain_events_id"),
+        UniqueConstraint("idempotency_key", name="uq_domain_events_idempotency_key"),
+        Index("ix_domain_events_aggregate", "aggregate_type", "aggregate_id", "sequence"),
+        Index("ix_domain_events_occurred", "occurred_at", "sequence"),
+    )
+
+    sequence: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"),
+        primary_key=True,
+        autoincrement=True,
+    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, nullable=False, default=uuid.uuid4)
+    aggregate_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    aggregate_id: Mapped[uuid.UUID] = mapped_column(Uuid, nullable=False)
+    aggregate_version: Mapped[int] = mapped_column(Integer, nullable=False)
+    event_type: Mapped[str] = mapped_column(String(128), nullable=False)
+    payload: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
+    idempotency_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    correlation_id: Mapped[uuid.UUID | None] = mapped_column(Uuid)
+    causation_id: Mapped[uuid.UUID | None] = mapped_column(Uuid)
+    occurred_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        default=utc_now,
+    )
+
+    deliveries: Mapped[list[EventDelivery]] = relationship(back_populates="event")
+
+
+class EventDelivery(RecordMixin, Base):
+    __tablename__ = "event_deliveries"
+    __table_args__ = (
+        UniqueConstraint("event_id", "transport", name="uq_event_deliveries_event_transport"),
+        Index("ix_event_deliveries_transport_delivered", "transport", "delivered_at"),
+    )
+
+    event_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("domain_events.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    transport: Mapped[str] = mapped_column(String(64), nullable=False)
+    attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    delivered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_error: Mapped[str | None] = mapped_column(Text)
+
+    event: Mapped[DomainEvent] = relationship(back_populates="deliveries")
+
+
+@event.listens_for(DomainEvent, "before_update")
+@event.listens_for(DomainEvent, "before_delete")
+def reject_domain_event_mutation(*_args: object) -> None:
+    raise TypeError("domain_events is append-only")

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task": "5.2 state machine and event system",
+  "status": "in_progress",
+  "current_stage": "wsl-integration-ready",
+  "schema_revision": "20260721_0002",
+  "checkpoint": "state transactions, immutable events, Redis worker, relay, WebSocket, and local regressions passed",
+  "local_verification": {
+    "pytest": "25 passed",
+    "ruff": "passed",
+    "ty": "passed",
+    "sqlite_upgrade_downgrade": "passed",
+    "alembic_model_drift": "passed",
+    "postgresql_offline_sql": "passed",
+    "source_regression": "passed"
+  },
+  "next_actions": [
+    "Apply revision 20260721_0002 to PostgreSQL 16.",
+    "Run the PostgreSQL and Redis crash-window recovery probe.",
+    "Restart API and Worker and verify event replay."
+  ]
+}

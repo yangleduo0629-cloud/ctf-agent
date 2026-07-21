@@ -2,7 +2,7 @@
   "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:49937cd7-eb36-5670-a53d-28961c3943f9",
+  "serialNumber": "urn:uuid:273a5c76-e674-5121-abb7-196719c85479",
   "version": 1,
   "metadata": {
     "timestamp": "2026-07-21T00:00:00Z",
@@ -2522,6 +2522,19 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:pypi/redis@6.2.0",
+      "name": "redis",
+      "version": "6.2.0",
+      "purl": "pkg:pypi/redis@6.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:pypi/referencing@0.37.0",
       "name": "referencing",
       "version": "0.37.0",
@@ -3634,6 +3647,7 @@
         "pkg:pypi/python-multipart@0.0.32",
         "pkg:pypi/pywin32@312",
         "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/redis@6.2.0",
         "pkg:pypi/referencing@0.37.0",
         "pkg:pypi/regex@2026.7.19",
         "pkg:pypi/requests@2.34.2",

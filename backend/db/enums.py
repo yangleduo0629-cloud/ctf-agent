@@ -9,11 +9,17 @@ class CompetitionStatus(StrEnum):
 
 
 class ChallengeStatus(StrEnum):
-    PENDING = "pending"
-    ACTIVE = "active"
+    NEW = "new"
+    INGESTED = "ingested"
+    CLASSIFIED = "classified"
+    READY = "ready"
+    SOLVING = "solving"
+    CANDIDATE = "candidate"
+    VERIFYING = "verifying"
     SOLVED = "solved"
-    FAILED = "failed"
-    ARCHIVED = "archived"
+    SUBMITTED = "submitted"
+    RETRY = "retry"
+    REVIEW = "review"
 
 
 class ArtifactRetentionPolicy(StrEnum):

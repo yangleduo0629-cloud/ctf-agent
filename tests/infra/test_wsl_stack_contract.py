@@ -12,10 +12,10 @@ def load_compose() -> dict:
 
 def test_expected_services_and_host_bindings() -> None:
     services = load_compose()["services"]
-    assert set(services) == {"postgres", "redis", "api", "web", "litellm"}
+    assert set(services) == {"postgres", "redis", "api", "worker", "web", "litellm"}
     assert services["web"]["ports"] == ["127.0.0.1:3000:3000"]
     assert services["api"]["ports"] == ["127.0.0.1:8080:8080"]
-    for internal_service in ("postgres", "redis", "litellm"):
+    for internal_service in ("postgres", "redis", "worker", "litellm"):
         assert "ports" not in services[internal_service]
     assert services["api"]["build"] == {
         "context": "../..",
@@ -45,6 +45,7 @@ def test_database_and_cache_use_internal_network() -> None:
     assert compose["networks"]["backend"]["internal"] is True
     assert compose["services"]["postgres"]["networks"] == ["backend"]
     assert compose["services"]["redis"]["networks"] == ["backend"]
+    assert compose["services"]["worker"]["networks"] == ["backend"]
 
 
 def test_secrets_are_runtime_variables() -> None:
@@ -61,7 +62,12 @@ def test_api_runs_migrations_before_startup() -> None:
     dockerfile = (INFRA / "api" / "Dockerfile").read_text(encoding="utf-8")
     health_check = (INFRA / "scripts" / "health-check.sh").read_text(encoding="utf-8")
     assert "alembic upgrade head && exec uvicorn" in dockerfile
-    assert 'schema_revision == "20260721_0001"' in health_check
+    assert 'schema_revision == "20260721_0002"' in health_check
+    assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
+
+
+def compose_worker_command() -> list[str]:
+    return load_compose()["services"]["worker"]["command"]
 
 
 def test_model_runtime_is_reserved_only() -> None:

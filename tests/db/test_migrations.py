@@ -20,6 +20,7 @@ TABLES_IN_ORDER = (
     "submissions",
     "eval_runs",
 )
+STATE_TABLES = {"domain_events", "event_deliveries"}
 
 
 def test_migration_uses_required_entity_order() -> None:
@@ -42,6 +43,7 @@ def test_alembic_upgrade_and_downgrade(tmp_path: Path) -> None:
     try:
         tables = set(inspect(engine).get_table_names())
         assert set(TABLES_IN_ORDER) <= tables
+        assert tables >= STATE_TABLES
         assert "alembic_version" in tables
     finally:
         engine.dispose()

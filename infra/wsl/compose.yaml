@@ -41,6 +41,7 @@ services:
       - backend
 
   api:
+    image: ctf-platform-api:local
     build:
       context: ../..
       dockerfile: infra/wsl/api/Dockerfile
@@ -73,6 +74,32 @@ services:
       start_period: 10s
     networks:
       - edge
+      - backend
+
+  worker:
+    image: ctf-platform-api:local
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+    command:
+      - python
+      - -m
+      - backend.orchestration.worker
+    depends_on:
+      api:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-m", "backend.orchestration.worker", "--healthcheck"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
       - backend
 
   web:
