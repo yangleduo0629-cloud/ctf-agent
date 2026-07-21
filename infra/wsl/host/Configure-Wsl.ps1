@@ -32,6 +32,7 @@ swapFile=$swapFile
 localhostForwarding=true
 autoProxy=false
 dnsTunneling=true
+vmIdleTimeout=-1
 
 [experimental]
 autoMemoryReclaim=gradual

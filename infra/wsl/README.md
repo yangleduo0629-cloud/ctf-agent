@@ -30,7 +30,8 @@ Set-ExecutionPolicy -Scope Process Bypass
 ```
 
 The script validates the VHDX path and writes a 10 GB memory, 12 CPU, 4 GB swap WSL2 profile with
-localhost forwarding. It then shuts WSL down so the resource profile applies on the next start.
+localhost forwarding. Idle VM shutdown is disabled so native Docker services stay available, while
+gradual memory reclaim remains enabled. The script then shuts WSL down so the profile applies.
 
 ## Install and deploy
 
