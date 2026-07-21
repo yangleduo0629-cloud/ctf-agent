@@ -18,6 +18,8 @@ $existing = Get-NetTCPConnection -State Listen -LocalAddress $adapter.IPAddress 
 if (-not $existing) {
     $python = (Get-Command python -ErrorAction Stop).Source
     $relay = Join-Path $PSScriptRoot 'proxy_relay.py'
+    $stateDir = Join-Path $env:LOCALAPPDATA 'CTF-Platform'
+    New-Item -ItemType Directory -Force -Path $stateDir | Out-Null
     $arguments = @(
         ('"{0}"' -f $relay),
         '--listen-host', $adapter.IPAddress,
@@ -25,7 +27,9 @@ if (-not $existing) {
         '--target-host', '127.0.0.1',
         '--target-port', $SourcePort
     )
-    $process = Start-Process -FilePath $python -ArgumentList $arguments -WindowStyle Hidden -PassThru
+    $process = Start-Process -FilePath $python -ArgumentList $arguments -WindowStyle Hidden -PassThru `
+        -RedirectStandardOutput (Join-Path $stateDir 'proxy-relay.stdout.log') `
+        -RedirectStandardError (Join-Path $stateDir 'proxy-relay.stderr.log')
     Start-Sleep -Seconds 1
     if ($process.HasExited) {
         throw 'WSL proxy relay exited during startup.'
