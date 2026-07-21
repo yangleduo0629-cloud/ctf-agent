@@ -42,6 +42,9 @@ install -d -o ctf-platform -g ctf-platform -m 2770 \
   /srv/ctf-platform/models
 
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" config --quiet
+expected_services=$(
+  docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" config --services | wc -l
+)
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" build --pull
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" up --detach --remove-orphans
 
@@ -50,7 +53,7 @@ for _ in $(seq 1 60); do
     --format json | jq -s '[.[] | select(.Health != "healthy")] | length')
   running=$(docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" ps \
     --status running --services | wc -l)
-  if [[ ${running} -eq 5 && ${unhealthy} -eq 0 ]]; then
+  if [[ ${running} -eq ${expected_services} && ${unhealthy} -eq 0 ]]; then
     exec "${INFRA_DIR}/scripts/health-check.sh" --skip-gpu
   fi
   sleep 5

@@ -74,6 +74,12 @@ def test_api_runs_migrations_before_startup() -> None:
     assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
 
 
+def test_deploy_waits_for_the_configured_service_count() -> None:
+    deploy_script = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    assert "config --services | wc -l" in deploy_script
+    assert "running} -eq ${expected_services}" in deploy_script
+
+
 def compose_worker_command() -> list[str]:
     return load_compose()["services"]["worker"]["command"]
 
