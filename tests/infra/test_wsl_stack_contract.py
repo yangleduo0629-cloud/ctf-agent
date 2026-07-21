@@ -12,10 +12,18 @@ def load_compose() -> dict:
 
 def test_expected_services_and_host_bindings() -> None:
     services = load_compose()["services"]
-    assert set(services) == {"postgres", "redis", "api", "worker", "web", "litellm"}
+    assert set(services) == {
+        "postgres",
+        "redis",
+        "api",
+        "sandbox-runner",
+        "worker",
+        "web",
+        "litellm",
+    }
     assert services["web"]["ports"] == ["127.0.0.1:3000:3000"]
     assert services["api"]["ports"] == ["127.0.0.1:8080:8080"]
-    for internal_service in ("postgres", "redis", "worker", "litellm"):
+    for internal_service in ("postgres", "redis", "sandbox-runner", "worker", "litellm"):
         assert "ports" not in services[internal_service]
     assert services["api"]["build"] == {
         "context": "../..",
@@ -37,6 +45,7 @@ def test_persistent_mounts_stay_on_wsl_ext4_paths() -> None:
     ]
     assert "/srv/ctf-platform/data/postgres:/var/lib/postgresql/data" in volumes
     assert "/srv/ctf-platform/data/redis:/data" in volumes
+    assert "/srv/ctf-platform/data/sandboxes:/srv/ctf-platform/data/sandboxes" in volumes
     assert all(not volume.startswith("/mnt/") for volume in volumes)
 
 
@@ -54,6 +63,7 @@ def test_database_and_cache_use_internal_network() -> None:
     assert compose["networks"]["backend"]["internal"] is True
     assert compose["services"]["postgres"]["networks"] == ["backend"]
     assert compose["services"]["redis"]["networks"] == ["backend"]
+    assert compose["services"]["sandbox-runner"]["networks"] == ["backend"]
     assert compose["services"]["worker"]["networks"] == ["backend"]
 
 
@@ -65,9 +75,11 @@ def test_secrets_are_runtime_variables() -> None:
     assert "${LITELLM_MASTER_KEY}" in compose_text
     assert "${CTFD_TOKEN:-}" in compose_text
     assert "${CTFD_PASSWORD:-}" in compose_text
+    assert "${SANDBOX_RUNNER_TOKEN}" in compose_text
     assert "REPLACE_WITH_RANDOM_HEX" in example_text
     assert "CTFD_TOKEN=" in example_text
     assert "CTFD_PASSWORD=" in example_text
+    assert "SANDBOX_RUNNER_TOKEN=REPLACE_WITH_RANDOM_HEX" in example_text
     assert not (INFRA / ".env").exists()
 
 
@@ -77,8 +89,10 @@ def test_api_runs_migrations_before_startup() -> None:
     requirements = (INFRA / "api" / "requirements.txt").read_text(encoding="utf-8")
     assert "alembic upgrade head && exec uvicorn" in dockerfile
     assert "COPY backend/ingestion ./backend/ingestion" in dockerfile
+    assert "COPY backend/sandbox_runner ./backend/sandbox_runner" in dockerfile
     assert 'schema_revision == "20260721_0003"' in health_check
     assert "python-multipart==0.0.32" in requirements
+    assert "aiodocker==0.27.0" in requirements
     assert "websockets==16.1" in requirements
     assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
 
@@ -87,6 +101,25 @@ def test_deploy_waits_for_the_configured_service_count() -> None:
     deploy_script = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
     assert "config --services | wc -l" in deploy_script
     assert "running} -eq ${expected_services}" in deploy_script
+
+
+def test_sandbox_runner_is_internal_and_docker_socket_isolated() -> None:
+    services = load_compose()["services"]
+    api_volumes = services["api"]["volumes"]
+    runner = services["sandbox-runner"]
+    runner_dockerfile = (ROOT / "sandbox" / "Dockerfile.runner").read_text(encoding="utf-8")
+    deploy_script = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    dockerignore = (ROOT / ".dockerignore").read_text(encoding="utf-8")
+
+    assert all("docker.sock" not in volume for volume in api_volumes)
+    assert "/var/run/docker.sock:/var/run/docker.sock" in runner["volumes"]
+    assert runner["user"] == "0:0"
+    assert "ports" not in runner
+    assert runner["environment"]["SANDBOX_IMAGE"] == "ctf-sandbox-runner:local"
+    assert "@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7" in runner_dockerfile
+    assert "USER 65532:65532" in runner_dockerfile
+    assert "sandbox/Dockerfile.runner" in deploy_script
+    assert "!sandbox/runner_entrypoint.py" in dockerignore
 
 
 def compose_worker_command() -> list[str]:

@@ -12,6 +12,7 @@ COPY backend/__init__.py ./backend/__init__.py
 COPY backend/db ./backend/db
 COPY backend/ingestion ./backend/ingestion
 COPY backend/orchestration ./backend/orchestration
+COPY backend/sandbox_runner ./backend/sandbox_runner
 COPY infra/wsl/api/app ./app
 
 USER 65532:65532

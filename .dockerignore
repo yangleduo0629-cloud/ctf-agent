@@ -28,3 +28,6 @@
 !infra/wsl/api/**
 !migrations/
 !migrations/**
+!sandbox/
+!sandbox/Dockerfile.runner
+!sandbox/runner_entrypoint.py

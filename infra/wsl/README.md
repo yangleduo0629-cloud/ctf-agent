@@ -12,6 +12,7 @@ This directory defines the reproducible Ubuntu 24.04 foundation for the CTF plat
 | `/srv/ctf-platform/data/redis` | Redis 7 persistence |
 | `/srv/ctf-platform/data/artifacts` | Challenge artifacts |
 | `/srv/ctf-platform/data/checkpoints` | Task checkpoints |
+| `/srv/ctf-platform/data/sandboxes` | Ephemeral per-execution sandbox staging |
 | `/srv/ctf-platform/models` | Reserved local model directory |
 | `/var/lib/docker` | Native Docker Engine data |
 | `F:\CTF-Agent-Backups` | Exports and offline backups only |
@@ -55,7 +56,9 @@ The relay binds only to the WSL virtual adapter. `bootstrap.sh` passes the same 
 Docker daemon; Compose passes standard proxy build arguments without writing the proxy into images.
 
 `deploy.sh` creates `infra/wsl/.env` with random local secrets and mode `0600`. The file is ignored by
-Git. It builds and starts PostgreSQL, Redis, FastAPI, React/Vite, and LiteLLM in one Compose project.
+Git. It builds and starts PostgreSQL, Redis, FastAPI, the internal Docker sandbox runner, React/Vite,
+and LiteLLM in one Compose project. It also builds the pinned `ctf-sandbox-runner:local` execution
+image. Only the internal runner service mounts `/var/run/docker.sock`.
 
 After the initial deployment, start or stop the complete platform from Windows with one command:
 
@@ -75,7 +78,8 @@ Only the following host bindings exist:
 | FastAPI | `127.0.0.1:8080` |
 
 LiteLLM listens on port `4000` inside Compose. PostgreSQL `5432` and Redis `6379` are restricted to the
-internal Compose network. The future model service retains port `8001` without being installed here.
+internal Compose network. The sandbox controller listens on `8090` inside the same internal network.
+The future model service retains port `8001` without being installed here.
 
 ## Persistence and restore verification
 

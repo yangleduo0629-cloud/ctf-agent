@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 import asyncpg
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from redis.asyncio import from_url as redis_from_url
 
@@ -17,6 +17,10 @@ from backend.ingestion.storage import ArtifactStorage
 from backend.orchestration.api import OrchestrationRuntime
 from backend.orchestration.api import router as orchestration_router
 from backend.orchestration.redis_transport import EventRelay
+from backend.sandbox_runner.api import SandboxApiRuntime
+from backend.sandbox_runner.api import router as sandbox_router
+from backend.sandbox_runner.client import RunnerHttpClient
+from backend.sandbox_runner.services import SandboxExecutionService
 
 
 @asynccontextmanager
@@ -25,16 +29,26 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     session_factory = create_session_factory(engine)
     redis = redis_from_url(os.environ["REDIS_URL"], decode_responses=True)
     relay = EventRelay(redis, session_factory)
+    artifact_storage = ArtifactStorage(
+        Path(os.environ["ARTIFACTS_DIR"]),
+        max_size_bytes=int(os.environ.get("ARTIFACT_MAX_SIZE_BYTES", "536870912")),
+    )
+    catalog = ChallengeCatalog(session_factory, artifact_storage)
+    runner_client = RunnerHttpClient(
+        os.environ["SANDBOX_RUNNER_URL"],
+        os.environ["SANDBOX_RUNNER_TOKEN"],
+    )
     stop = asyncio.Event()
     relay_task = asyncio.create_task(relay.run(stop))
     application.state.orchestration = OrchestrationRuntime(redis, session_factory, relay)
-    application.state.ingestion = IngestionRuntime(
-        ChallengeCatalog(
+    application.state.ingestion = IngestionRuntime(catalog)
+    application.state.sandbox = SandboxApiRuntime(
+        SandboxExecutionService(
             session_factory,
-            ArtifactStorage(
-                Path(os.environ["ARTIFACTS_DIR"]),
-                max_size_bytes=int(os.environ.get("ARTIFACT_MAX_SIZE_BYTES", "536870912")),
-            ),
+            catalog,
+            runner_client,
+            redis,
+            Path(os.environ["SANDBOX_WORK_ROOT"]),
         )
     )
     try:
@@ -42,6 +56,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     finally:
         stop.set()
         await relay_task
+        await runner_client.close()
         await redis.aclose()
         engine.dispose()
 
@@ -49,6 +64,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(title="CTF Platform API", version="0.2.0", lifespan=lifespan)
 app.include_router(orchestration_router)
 app.include_router(ingestion_router)
+app.include_router(sandbox_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:3000", "http://localhost:3000"],
@@ -63,7 +79,7 @@ async def healthz() -> dict[str, str]:
 
 
 @app.get("/readyz")
-async def readyz() -> dict[str, object]:
+async def readyz(request: Request) -> dict[str, object]:
     database_url = os.environ["ASYNC_DATABASE_URL"]
     redis_url = os.environ["REDIS_URL"]
 
@@ -83,13 +99,16 @@ async def readyz() -> dict[str, object]:
     paths = {
         "artifacts": Path(os.environ["ARTIFACTS_DIR"]),
         "checkpoints": Path(os.environ["CHECKPOINTS_DIR"]),
+        "sandboxes": Path(os.environ["SANDBOX_WORK_ROOT"]),
     }
+    sandbox_ready = await request.app.state.sandbox.executions.runner.healthcheck()
     return {
         "status": "ready",
         "dependencies": {
             "postgres": database_ready,
             "redis": redis_ready,
             "schema_revision": schema_revision,
+            "sandbox_runner": sandbox_ready,
         },
         "storage": {
             name: path.is_dir() and os.access(path, os.W_OK)
