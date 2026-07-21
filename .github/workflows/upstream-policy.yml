@@ -21,6 +21,10 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Configure official upstream remote
+        run: |
+          git remote add upstream https://github.com/verialabs/ctf-agent.git
+          git remote set-url --push upstream DISABLED
       - name: Detect environment-relevant changes
         id: changes
         if: github.event_name == 'pull_request'

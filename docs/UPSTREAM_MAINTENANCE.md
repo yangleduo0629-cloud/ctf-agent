@@ -49,8 +49,9 @@ uv pip compile upstream/hexstrike-ai/requirements.txt \
 ```
 
 The adjacent `.meta.json` binds that generated lock to both the HexStrike
-commit and the SHA-256 of its input requirements file. The provenance guard
-rejects a stale resolved lock.
+commit and the SHA-256 of the requirements Git blob. Hashing the blob keeps
+the result stable across LF/CRLF checkouts. The provenance guard rejects a
+stale resolved lock.
 
 The fork pins `pydantic-ai-slim[bedrock,openai,google]==1.73.0`, the last
 release available before the Veria baseline commit. Later 2.x releases remove

@@ -54,6 +54,19 @@ def _git(*args: str, cwd: Path = ROOT, check: bool = True) -> str:
     return result.stdout.strip()
 
 
+def _git_bytes(*args: str, cwd: Path = ROOT) -> bytes:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=cwd,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise GuardError(f"git {' '.join(args)} failed: {detail}")
+    return result.stdout
+
+
 def _normalized_repo(url: str) -> str:
     value = url.strip().replace("git@github.com:", "https://github.com/")
     return value.removesuffix("/").removesuffix(".git").lower()
@@ -386,7 +399,13 @@ def verify() -> None:
     input_path = ROOT / hexstrike_meta.get("input_path", "")
     if not input_path.is_file():
         raise GuardError("HexStrike dependency-lock input is missing")
-    input_digest = hashlib.sha256(input_path.read_bytes()).hexdigest()
+    source_path = Path(hexstrike_meta["input_path"]).relative_to(hexstrike["local_path"]).as_posix()
+    source_blob = _git_bytes(
+        "show",
+        f"{hexstrike['commit']}:{source_path}",
+        cwd=ROOT / hexstrike["local_path"],
+    )
+    input_digest = hashlib.sha256(source_blob).hexdigest()
     if input_digest != hexstrike_meta.get("input_sha256"):
         raise GuardError("HexStrike requirements changed without regenerating its dependency lock")
 

@@ -30,6 +30,13 @@ def _run(*args: str, cwd: Path = ROOT) -> str:
     return result.stdout.strip()
 
 
+def _run_bytes(*args: str, cwd: Path = ROOT) -> bytes:
+    result = subprocess.run(list(args), cwd=cwd, check=False, capture_output=True)
+    if result.returncode:
+        raise RuntimeError(result.stderr.decode("utf-8", errors="replace").strip())
+    return result.stdout
+
+
 def require_update_branch(branch: str) -> None:
     if not branch.startswith("upstream/"):
         raise RuntimeError("upstream changes require an upstream/* branch")
@@ -100,7 +107,13 @@ def prepare(component_id: str, ref: str) -> str:
             "--output-file",
             resolved_lock,
         )
-        digest = hashlib.sha256((ROOT / requirements).read_bytes()).hexdigest()
+        source_blob = _run_bytes(
+            "git",
+            "show",
+            f"{new_sha}:requirements.txt",
+            cwd=ROOT / component["local_path"],
+        )
+        digest = hashlib.sha256(source_blob).hexdigest()
         metadata_path = ROOT / "third_party" / "locks" / "hexstrike-requirements.lock.meta.json"
         _write_json(
             metadata_path,
