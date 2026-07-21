@@ -178,7 +178,7 @@ class DockerSandboxRunner:
                 "OomKillDisable": False,
                 "LogConfig": {
                     "Type": "local",
-                    "Config": {"max-size": "2m", "max-file": "1"},
+                    "Config": {"max-size": "2m", "max-file": "2"},
                 },
                 "Ulimits": [
                     {"Name": "nofile", "Soft": 1024, "Hard": 1024},
@@ -216,14 +216,14 @@ class DockerSandboxRunner:
         return files
 
     def cleanup_execution(self, challenge_id, execution_id) -> None:
-        shutil.rmtree(self.execution_root(challenge_id, execution_id), ignore_errors=True)
+        _remove_tree(self.execution_root(challenge_id, execution_id))
 
     def _prepare_execution(
         self,
         request: RunnerExecutionRequest,
     ) -> tuple[Path, Path, Path]:
         execution_root = self.execution_root(request.challenge_id, request.execution_id)
-        shutil.rmtree(execution_root, ignore_errors=True)
+        _remove_tree(execution_root)
         challenge_root = execution_root.parent
         challenge_root.mkdir(parents=True, exist_ok=True)
         _set_directory_access(challenge_root, 0o770)
@@ -233,7 +233,7 @@ class DockerSandboxRunner:
         attachments_dir.mkdir()
         workspace_dir.mkdir()
         _set_directory_access(execution_root, 0o770)
-        _set_directory_access(attachments_dir, 0o550)
+        _set_directory_access(attachments_dir, 0o770)
         _set_directory_access(workspace_dir, 0o770)
 
         used_names: set[str] = set()
@@ -247,7 +247,7 @@ class DockerSandboxRunner:
             used_names.add(name)
             destination = attachments_dir / name
             shutil.copyfile(source, destination)
-            destination.chmod(0o440)
+            destination.chmod(0o640)
             _set_owner(destination)
         return execution_root, attachments_dir, workspace_dir
 
@@ -270,7 +270,7 @@ class DockerSandboxRunner:
 
     @staticmethod
     def _remove_internal_files(workspace_dir: Path) -> None:
-        shutil.rmtree(workspace_dir / ".runner", ignore_errors=True)
+        _remove_tree(workspace_dir / ".runner")
 
     @staticmethod
     async def _remove_stale_container(docker, name: str) -> None:
@@ -298,3 +298,14 @@ def _truncate_utf8(value: str, max_bytes: int) -> tuple[str, bool]:
     if len(encoded) <= max_bytes:
         return value, False
     return encoded[:max_bytes].decode("utf-8", errors="ignore"), True
+
+
+def _remove_tree(path: Path) -> None:
+    if not path.exists():
+        return
+
+    def make_writable(function, target, _error) -> None:
+        Path(target).chmod(0o700)
+        function(target)
+
+    shutil.rmtree(path, onexc=make_writable)

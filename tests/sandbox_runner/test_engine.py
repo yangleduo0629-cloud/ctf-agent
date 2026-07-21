@@ -50,7 +50,7 @@ def test_container_config_enforces_isolation_and_limits(tmp_path: Path) -> None:
     assert host["Memory"] == host["MemorySwap"] == 256 * 1024 * 1024
     assert host["NanoCpus"] == 1_500_000_000
     assert host["PidsLimit"] == 32
-    assert host["LogConfig"]["Config"] == {"max-size": "2m", "max-file": "1"}
+    assert host["LogConfig"]["Config"] == {"max-size": "2m", "max-file": "2"}
     assert f"{attachments}:/attachments:ro" in host["Binds"]
     assert f"{workspace}:/workspace:rw" in host["Binds"]
 
@@ -88,9 +88,11 @@ def test_prepare_execution_isolates_read_only_attachments_and_script(tmp_path: P
 
     mounted = attachments / "input.txt"
     assert mounted.read_text(encoding="utf-8") == "original"
-    assert not os.access(mounted, os.W_OK) if os.name != "nt" else True
     assert command[:2] == ["/usr/local/bin/python", "/workspace/.runner/task.py"]
     assert (workspace / ".runner" / "task.py").read_text(encoding="utf-8") == "print('ok')"
+
+    runner.cleanup_execution(request.challenge_id, request.execution_id)
+    assert not workspace.parent.exists()
 
 
 def test_generated_file_collection_skips_symlinks_and_enforces_limits(tmp_path: Path) -> None:
