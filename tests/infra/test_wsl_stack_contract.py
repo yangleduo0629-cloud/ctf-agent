@@ -61,8 +61,10 @@ def test_secrets_are_runtime_variables() -> None:
 def test_api_runs_migrations_before_startup() -> None:
     dockerfile = (INFRA / "api" / "Dockerfile").read_text(encoding="utf-8")
     health_check = (INFRA / "scripts" / "health-check.sh").read_text(encoding="utf-8")
+    requirements = (INFRA / "api" / "requirements.txt").read_text(encoding="utf-8")
     assert "alembic upgrade head && exec uvicorn" in dockerfile
     assert 'schema_revision == "20260721_0002"' in health_check
+    assert "websockets==16.1" in requirements
     assert compose_worker_command() == ["python", "-m", "backend.orchestration.worker"]
 
 

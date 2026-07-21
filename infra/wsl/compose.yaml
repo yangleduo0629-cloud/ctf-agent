@@ -78,6 +78,7 @@ services:
 
   worker:
     image: ctf-platform-api:local
+    pull_policy: never
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}

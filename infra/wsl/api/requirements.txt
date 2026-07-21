@@ -5,3 +5,4 @@ psycopg[binary]==3.3.4
 redis==6.2.0
 sqlalchemy==2.0.51
 uvicorn==0.35.0
+websockets==16.1
