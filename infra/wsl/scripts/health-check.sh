@@ -19,6 +19,7 @@ curl --fail --silent --show-error http://127.0.0.1:8080/readyz | jq -e '
   .status == "ready"
   and .dependencies.postgres
   and .dependencies.redis
+  and .dependencies.schema_revision == "20260721_0001"
   and .storage.artifacts
   and .storage.checkpoints' >/dev/null
 curl --fail --silent --show-error http://127.0.0.1:3000/ >/dev/null

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task": "5.1 domain data model",
+  "status": "in_progress",
+  "current_stage": "postgres-deployment-ready",
+  "checkpoint": "11 ORM entities, repository policy, Alembic revision, API integration, and local regressions passed",
+  "schema_revision": "20260721_0001",
+  "local_verification": {
+    "pytest": "17 passed",
+    "ruff": "passed",
+    "ty": "passed",
+    "sqlite_upgrade_downgrade": "passed",
+    "alembic_model_drift": "passed",
+    "postgresql_offline_sql": "passed",
+    "source_regression": "passed"
+  },
+  "next_actions": [
+    "Apply revision 20260721_0001 to PostgreSQL 16.",
+    "Run the rollback-only repository round-trip probe.",
+    "Verify restart persistence and API schema health."
+  ]
+}

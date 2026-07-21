@@ -17,6 +17,15 @@ def test_expected_services_and_host_bindings() -> None:
     assert services["api"]["ports"] == ["127.0.0.1:8080:8080"]
     for internal_service in ("postgres", "redis", "litellm"):
         assert "ports" not in services[internal_service]
+    assert services["api"]["build"] == {
+        "context": "../..",
+        "dockerfile": "infra/wsl/api/Dockerfile",
+        "args": {
+            "HTTP_PROXY": "${HTTP_PROXY:-}",
+            "HTTPS_PROXY": "${HTTPS_PROXY:-}",
+            "NO_PROXY": "${NO_PROXY:-localhost,127.0.0.1}",
+        },
+    }
 
 
 def test_persistent_mounts_stay_on_wsl_ext4_paths() -> None:
@@ -46,6 +55,13 @@ def test_secrets_are_runtime_variables() -> None:
     assert "${LITELLM_MASTER_KEY}" in compose_text
     assert "REPLACE_WITH_RANDOM_HEX" in example_text
     assert not (INFRA / ".env").exists()
+
+
+def test_api_runs_migrations_before_startup() -> None:
+    dockerfile = (INFRA / "api" / "Dockerfile").read_text(encoding="utf-8")
+    health_check = (INFRA / "scripts" / "health-check.sh").read_text(encoding="utf-8")
+    assert "alembic upgrade head && exec uvicorn" in dockerfile
+    assert 'schema_revision == "20260721_0001"' in health_check
 
 
 def test_model_runtime_is_reserved_only() -> None:

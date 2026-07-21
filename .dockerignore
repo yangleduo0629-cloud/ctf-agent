@@ -1,0 +1,12 @@
+**
+!alembic.ini
+!backend/
+!backend/__init__.py
+!backend/db/
+!backend/db/**
+!infra/
+!infra/wsl/
+!infra/wsl/api/
+!infra/wsl/api/**
+!migrations/
+!migrations/**
