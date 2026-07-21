@@ -109,6 +109,7 @@ def test_sandbox_runner_is_internal_and_docker_socket_isolated() -> None:
     runner = services["sandbox-runner"]
     runner_dockerfile = (ROOT / "sandbox" / "Dockerfile.runner").read_text(encoding="utf-8")
     deploy_script = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    dockerignore = (ROOT / ".dockerignore").read_text(encoding="utf-8")
 
     assert all("docker.sock" not in volume for volume in api_volumes)
     assert "/var/run/docker.sock:/var/run/docker.sock" in runner["volumes"]
@@ -118,6 +119,7 @@ def test_sandbox_runner_is_internal_and_docker_socket_isolated() -> None:
     assert "@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7" in runner_dockerfile
     assert "USER 65532:65532" in runner_dockerfile
     assert "sandbox/Dockerfile.runner" in deploy_script
+    assert "!sandbox/runner_entrypoint.py" in dockerignore
 
 
 def compose_worker_command() -> list[str]:
