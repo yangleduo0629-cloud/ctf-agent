@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T00:00:00Z",
+  "product": {
+    "name": "ctf-agent",
+    "repository": "https://github.com/yangleduo0629-cloud/ctf-agent.git",
+    "upstream_remote": "upstream",
+    "default_branch": "main"
+  },
+  "components": [
+    {
+      "id": "veria-ctf-agent",
+      "name": "Veria CTF Agent",
+      "type": "application",
+      "integration": "fork-base",
+      "repository": "https://github.com/verialabs/ctf-agent.git",
+      "homepage": "https://github.com/verialabs/ctf-agent",
+      "default_branch": "main",
+      "commit": "3366d569557c4fda3fd153040632de65e255396d",
+      "local_path": ".",
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "copyright": "Copyright (c) 2026 Veria Labs, Inc."
+      },
+      "environment": {
+        "python": "3.14",
+        "definition": "environments/veria.Dockerfile",
+        "smoke_command": "python scripts/upstream_env.py smoke veria-ctf-agent"
+      }
+    },
+    {
+      "id": "pentestgpt",
+      "name": "PentestGPT",
+      "type": "application",
+      "integration": "git-submodule",
+      "repository": "https://github.com/GreyDGL/PentestGPT.git",
+      "homepage": "https://github.com/GreyDGL/PentestGPT",
+      "default_branch": "main",
+      "commit": "e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+      "local_path": "upstream/pentestgpt",
+      "license": {
+        "spdx": "MIT",
+        "path": "upstream/pentestgpt/LICENSE.md",
+        "copyright": "Copyright (c) 2023 Grey_D"
+      },
+      "environment": {
+        "python": "3.12",
+        "definition": "environments/pentestgpt.Dockerfile",
+        "smoke_command": "python scripts/upstream_env.py smoke pentestgpt"
+      }
+    },
+    {
+      "id": "hexstrike-ai",
+      "name": "HexStrike AI",
+      "type": "application",
+      "integration": "git-submodule",
+      "repository": "https://github.com/0x4m4/hexstrike-ai.git",
+      "homepage": "https://github.com/0x4m4/hexstrike-ai",
+      "default_branch": "master",
+      "commit": "9b8c780f324ce5145a322bfa23c98886f8424ba3",
+      "local_path": "upstream/hexstrike-ai",
+      "license": {
+        "spdx": "MIT",
+        "path": "upstream/hexstrike-ai/LICENSE",
+        "copyright": "Copyright (c) 2026 Muhammad Osama (0x4m4) <contact@0x4m4.com>"
+      },
+      "environment": {
+        "python": "3.12",
+        "definition": "environments/hexstrike-ai.Dockerfile",
+        "smoke_command": "python scripts/upstream_env.py smoke hexstrike-ai"
+      }
+    }
+  ]
+}

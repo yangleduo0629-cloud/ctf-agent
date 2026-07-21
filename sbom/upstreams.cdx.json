@@ -1,0 +1,3579 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:a0b523c8-257e-51de-b886-cd5d25473fac",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-21T00:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "upstream_guard.py",
+          "version": "1"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "urn:ctf-agent:product",
+      "name": "ctf-agent"
+    },
+    "properties": [
+      {
+        "name": "ctf-agent:lockfile",
+        "value": "UPSTREAMS.lock.json"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "pkg:github/verialabs/ctf-agent@3366d569557c4fda3fd153040632de65e255396d",
+      "group": "verialabs",
+      "name": "ctf-agent",
+      "version": "3366d569557c4fda3fd153040632de65e255396d",
+      "purl": "pkg:github/verialabs/ctf-agent@3366d569557c4fda3fd153040632de65e255396d",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "copyright": "Copyright (c) 2026 Veria Labs, Inc.",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/verialabs/ctf-agent"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/verialabs/ctf-agent.git#3366d569557c4fda3fd153040632de65e255396d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:git-commit",
+          "value": "3366d569557c4fda3fd153040632de65e255396d"
+        },
+        {
+          "name": "ctf-agent:integration",
+          "value": "fork-base"
+        },
+        {
+          "name": "ctf-agent:local-path",
+          "value": "."
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:github/GreyDGL/PentestGPT@e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+      "group": "GreyDGL",
+      "name": "PentestGPT",
+      "version": "e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+      "purl": "pkg:github/GreyDGL/PentestGPT@e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "copyright": "Copyright (c) 2023 Grey_D",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/GreyDGL/PentestGPT"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/GreyDGL/PentestGPT.git#e8b1bb77d1ac00329675cec3b060aba971ec1ac8"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:git-commit",
+          "value": "e8b1bb77d1ac00329675cec3b060aba971ec1ac8"
+        },
+        {
+          "name": "ctf-agent:integration",
+          "value": "git-submodule"
+        },
+        {
+          "name": "ctf-agent:local-path",
+          "value": "upstream/pentestgpt"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:github/0x4m4/hexstrike-ai@9b8c780f324ce5145a322bfa23c98886f8424ba3",
+      "group": "0x4m4",
+      "name": "hexstrike-ai",
+      "version": "9b8c780f324ce5145a322bfa23c98886f8424ba3",
+      "purl": "pkg:github/0x4m4/hexstrike-ai@9b8c780f324ce5145a322bfa23c98886f8424ba3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "copyright": "Copyright (c) 2026 Muhammad Osama (0x4m4) <contact@0x4m4.com>",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://github.com/0x4m4/hexstrike-ai"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/0x4m4/hexstrike-ai.git#9b8c780f324ce5145a322bfa23c98886f8424ba3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:git-commit",
+          "value": "9b8c780f324ce5145a322bfa23c98886f8424ba3"
+        },
+        {
+          "name": "ctf-agent:integration",
+          "value": "git-submodule"
+        },
+        {
+          "name": "ctf-agent:local-path",
+          "value": "upstream/hexstrike-ai"
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "bom-ref": "docker.io/library/python:3.14.6-slim-bookworm@sha256:86f975aca15cf04a40b399eebede9aea7c82eae084d1f1a0a6ef6bcaae871a30",
+      "name": "python",
+      "version": "3.14.6-slim-bookworm",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "86f975aca15cf04a40b399eebede9aea7c82eae084d1f1a0a6ef6bcaae871a30"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://hub.docker.com/_/python"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:registry",
+          "value": "docker.io/library/python"
+        },
+        {
+          "name": "ctf-agent:used-by",
+          "value": "veria-ctf-agent"
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "bom-ref": "docker.io/library/python:3.12.11-slim-bookworm@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+      "name": "python",
+      "version": "3.12.11-slim-bookworm",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://hub.docker.com/_/python"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:registry",
+          "value": "docker.io/library/python"
+        },
+        {
+          "name": "ctf-agent:used-by",
+          "value": "pentestgpt,hexstrike-ai"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+      "group": "actions",
+      "name": "checkout",
+      "version": "11bd71901bbe5b1630ceea73d27597364c9af683",
+      "purl": "pkg:github/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+      "scope": "excluded",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/actions/checkout.git#11bd71901bbe5b1630ceea73d27597364c9af683"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ctf-agent:scope",
+          "value": "ci-only"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ailment@9.2.120",
+      "name": "ailment",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/ailment@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiodocker@0.27.0",
+      "name": "aiodocker",
+      "version": "0.27.0",
+      "purl": "pkg:pypi/aiodocker@0.27.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.7.1",
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1",
+      "purl": "pkg:pypi/aiohappyeyeballs@2.7.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohttp@3.14.1",
+      "name": "aiohttp",
+      "version": "3.14.1",
+      "purl": "pkg:pypi/aiohttp@3.14.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/aioquic@1.2.0",
+      "name": "aioquic",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/aioquic@1.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0",
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/aiosignal@1.4.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/angr@9.2.120",
+      "name": "angr",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/angr@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-doc@0.0.4",
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "purl": "pkg:pypi/annotated-doc@0.0.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-types@0.7.0",
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "purl": "pkg:pypi/annotated-types@0.7.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/anthropic@0.109.1",
+      "name": "anthropic",
+      "version": "0.109.1",
+      "purl": "pkg:pypi/anthropic@0.109.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/anyio@4.13.0",
+      "name": "anyio",
+      "version": "4.13.0",
+      "purl": "pkg:pypi/anyio@4.13.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/anyio@4.14.2",
+      "name": "anyio",
+      "version": "4.14.2",
+      "purl": "pkg:pypi/anyio@4.14.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/archinfo@9.2.120",
+      "name": "archinfo",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/archinfo@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/asgiref@3.8.1",
+      "name": "asgiref",
+      "version": "3.8.1",
+      "purl": "pkg:pypi/asgiref@3.8.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ast-serialize@0.5.0",
+      "name": "ast-serialize",
+      "version": "0.5.0",
+      "purl": "pkg:pypi/ast-serialize@0.5.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/attrs@26.1.0",
+      "name": "attrs",
+      "version": "26.1.0",
+      "purl": "pkg:pypi/attrs@26.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/backoff@2.2.1",
+      "name": "backoff",
+      "version": "2.2.1",
+      "purl": "pkg:pypi/backoff@2.2.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/bcrypt@4.0.1",
+      "name": "bcrypt",
+      "version": "4.0.1",
+      "purl": "pkg:pypi/bcrypt@4.0.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/beautifulsoup4@4.15.0",
+      "name": "beautifulsoup4",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/beautifulsoup4@4.15.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/bitarray@3.9.1",
+      "name": "bitarray",
+      "version": "3.9.1",
+      "purl": "pkg:pypi/bitarray@3.9.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/bitstring@4.4.0",
+      "name": "bitstring",
+      "version": "4.4.0",
+      "purl": "pkg:pypi/bitstring@4.4.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/blinker@1.9.0",
+      "name": "blinker",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/blinker@1.9.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/boto3@1.43.51",
+      "name": "boto3",
+      "version": "1.43.51",
+      "purl": "pkg:pypi/boto3@1.43.51",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/botocore@1.43.51",
+      "name": "botocore",
+      "version": "1.43.51",
+      "purl": "pkg:pypi/botocore@1.43.51",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/brotli@1.1.0",
+      "name": "brotli",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/brotli@1.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cachetools@7.1.4",
+      "name": "cachetools",
+      "version": "7.1.4",
+      "purl": "pkg:pypi/cachetools@7.1.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/capstone@5.0.3",
+      "name": "capstone",
+      "version": "5.0.3",
+      "purl": "pkg:pypi/capstone@5.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cart@1.2.3",
+      "name": "cart",
+      "version": "1.2.3",
+      "purl": "pkg:pypi/cart@1.2.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.5.20",
+      "name": "certifi",
+      "version": "2026.5.20",
+      "purl": "pkg:pypi/certifi@2026.5.20",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.6.17",
+      "name": "certifi",
+      "version": "2026.6.17",
+      "purl": "pkg:pypi/certifi@2026.6.17",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cffi@2.0.0",
+      "name": "cffi",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/cffi@2.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cffi@2.1.0",
+      "name": "cffi",
+      "version": "2.1.0",
+      "purl": "pkg:pypi/cffi@2.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.7",
+      "name": "charset-normalizer",
+      "version": "3.4.7",
+      "purl": "pkg:pypi/charset-normalizer@3.4.7",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.9",
+      "name": "charset-normalizer",
+      "version": "3.4.9",
+      "purl": "pkg:pypi/charset-normalizer@3.4.9",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/claripy@9.2.120",
+      "name": "claripy",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/claripy@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/claude-agent-sdk@0.2.101",
+      "name": "claude-agent-sdk",
+      "version": "0.2.101",
+      "purl": "pkg:pypi/claude-agent-sdk@0.2.101",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/claude-agent-sdk@0.2.123",
+      "name": "claude-agent-sdk",
+      "version": "0.2.123",
+      "purl": "pkg:pypi/claude-agent-sdk@0.2.123",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cle@9.2.120",
+      "name": "cle",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/cle@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.4.1",
+      "name": "click",
+      "version": "8.4.1",
+      "purl": "pkg:pypi/click@8.4.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.4.2",
+      "name": "click",
+      "version": "8.4.2",
+      "purl": "pkg:pypi/click@8.4.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/colored-traceback@0.4.2",
+      "name": "colored-traceback",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/colored-traceback@0.4.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@7.14.1",
+      "name": "coverage",
+      "version": "7.14.1",
+      "purl": "pkg:pypi/coverage@7.14.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cppheaderparser@2.7.4",
+      "name": "cppheaderparser",
+      "version": "2.7.4",
+      "purl": "pkg:pypi/cppheaderparser@2.7.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@43.0.3",
+      "name": "cryptography",
+      "version": "43.0.3",
+      "purl": "pkg:pypi/cryptography@43.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@49.0.0",
+      "name": "cryptography",
+      "version": "49.0.0",
+      "purl": "pkg:pypi/cryptography@49.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/distro@1.9.0",
+      "name": "distro",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/distro@1.9.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/docstring-parser@0.18.0",
+      "name": "docstring-parser",
+      "version": "0.18.0",
+      "purl": "pkg:pypi/docstring-parser@0.18.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/fastmcp@0.4.1",
+      "name": "fastmcp",
+      "version": "0.4.1",
+      "purl": "pkg:pypi/fastmcp@0.4.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/flask@3.0.3",
+      "name": "flask",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/flask@3.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0",
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/frozenlist@1.8.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/future@1.0.0",
+      "name": "future",
+      "version": "1.0.0",
+      "purl": "pkg:pypi/future@1.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/genai-prices@0.0.71",
+      "name": "genai-prices",
+      "version": "0.0.71",
+      "purl": "pkg:pypi/genai-prices@0.0.71",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/gitdb@4.0.12",
+      "name": "gitdb",
+      "version": "4.0.12",
+      "purl": "pkg:pypi/gitdb@4.0.12",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/gitpython@3.1.53",
+      "name": "gitpython",
+      "version": "3.1.53",
+      "purl": "pkg:pypi/gitpython@3.1.53",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/google-auth@2.54.0",
+      "name": "google-auth",
+      "version": "2.54.0",
+      "purl": "pkg:pypi/google-auth@2.54.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/google-auth@2.55.2",
+      "name": "google-auth",
+      "version": "2.55.2",
+      "purl": "pkg:pypi/google-auth@2.55.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/google-genai@2.12.1",
+      "name": "google-genai",
+      "version": "2.12.1",
+      "purl": "pkg:pypi/google-genai@2.12.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/google-genai@2.8.0",
+      "name": "google-genai",
+      "version": "2.8.0",
+      "purl": "pkg:pypi/google-genai@2.8.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/googleapis-common-protos@1.75.0",
+      "name": "googleapis-common-protos",
+      "version": "1.75.0",
+      "purl": "pkg:pypi/googleapis-common-protos@1.75.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/griffelib@2.1.0",
+      "name": "griffelib",
+      "version": "2.1.0",
+      "purl": "pkg:pypi/griffelib@2.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11@0.14.0",
+      "name": "h11",
+      "version": "0.14.0",
+      "purl": "pkg:pypi/h11@0.14.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11@0.16.0",
+      "name": "h11",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/h11@0.16.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/h2@4.1.0",
+      "name": "h2",
+      "version": "4.1.0",
+      "purl": "pkg:pypi/h2@4.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/hpack@4.2.0",
+      "name": "hpack",
+      "version": "4.2.0",
+      "purl": "pkg:pypi/hpack@4.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore2@2.7.0",
+      "name": "httpcore2",
+      "version": "2.7.0",
+      "purl": "pkg:pypi/httpcore2@2.7.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore@1.0.8",
+      "name": "httpcore",
+      "version": "1.0.8",
+      "purl": "pkg:pypi/httpcore@1.0.8",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore@1.0.9",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "purl": "pkg:pypi/httpcore@1.0.9",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx-sse@0.4.3",
+      "name": "httpx-sse",
+      "version": "0.4.3",
+      "purl": "pkg:pypi/httpx-sse@0.4.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx2@2.7.0",
+      "name": "httpx2",
+      "version": "2.7.0",
+      "purl": "pkg:pypi/httpx2@2.7.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "name": "httpx",
+      "version": "0.28.1",
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/hyperframe@6.0.1",
+      "name": "hyperframe",
+      "version": "6.0.1",
+      "purl": "pkg:pypi/hyperframe@6.0.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.18",
+      "name": "idna",
+      "version": "3.18",
+      "purl": "pkg:pypi/idna@3.18",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/iniconfig@2.3.0",
+      "name": "iniconfig",
+      "version": "2.3.0",
+      "purl": "pkg:pypi/iniconfig@2.3.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/intervaltree@3.2.1",
+      "name": "intervaltree",
+      "version": "3.2.1",
+      "purl": "pkg:pypi/intervaltree@3.2.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/invoke@3.0.3",
+      "name": "invoke",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/invoke@3.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/itanium-demangler@1.1",
+      "name": "itanium-demangler",
+      "version": "1.1",
+      "purl": "pkg:pypi/itanium-demangler@1.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/itsdangerous@2.2.0",
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "purl": "pkg:pypi/itsdangerous@2.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6",
+      "name": "jinja2",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jiter@0.15.0",
+      "name": "jiter",
+      "version": "0.15.0",
+      "purl": "pkg:pypi/jiter@0.15.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jiter@0.16.0",
+      "name": "jiter",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/jiter@0.16.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jmespath@1.1.0",
+      "name": "jmespath",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/jmespath@1.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema-specifications@2025.9.1",
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "purl": "pkg:pypi/jsonschema-specifications@2025.9.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema@4.26.0",
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "purl": "pkg:pypi/jsonschema@4.26.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/kaitaistruct@0.10",
+      "name": "kaitaistruct",
+      "version": "0.10",
+      "purl": "pkg:pypi/kaitaistruct@0.10",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/langfuse@4.8.0b1",
+      "name": "langfuse",
+      "version": "4.8.0b1",
+      "purl": "pkg:pypi/langfuse@4.8.0b1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ldap3@2.9.1",
+      "name": "ldap3",
+      "version": "2.9.1",
+      "purl": "pkg:pypi/ldap3@2.9.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/librt@0.11.0",
+      "name": "librt",
+      "version": "0.11.0",
+      "purl": "pkg:pypi/librt@0.11.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/logfire-api@4.38.0",
+      "name": "logfire-api",
+      "version": "4.38.0",
+      "purl": "pkg:pypi/logfire-api@4.38.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/loguru@0.7.3",
+      "name": "loguru",
+      "version": "0.7.3",
+      "purl": "pkg:pypi/loguru@0.7.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mako@1.3.12",
+      "name": "mako",
+      "version": "1.3.12",
+      "purl": "pkg:pypi/mako@1.3.12",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/markdown-it-py@4.2.0",
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "purl": "pkg:pypi/markdown-it-py@4.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/markdownify@1.2.3",
+      "name": "markdownify",
+      "version": "1.2.3",
+      "purl": "pkg:pypi/markdownify@1.2.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3",
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mcp@1.27.2",
+      "name": "mcp",
+      "version": "1.27.2",
+      "purl": "pkg:pypi/mcp@1.27.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mcp@1.28.1",
+      "name": "mcp",
+      "version": "1.28.1",
+      "purl": "pkg:pypi/mcp@1.28.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mdurl@0.1.2",
+      "name": "mdurl",
+      "version": "0.1.2",
+      "purl": "pkg:pypi/mdurl@0.1.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mitmproxy-rs@0.6.3",
+      "name": "mitmproxy-rs",
+      "version": "0.6.3",
+      "purl": "pkg:pypi/mitmproxy-rs@0.6.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mitmproxy@10.4.2",
+      "name": "mitmproxy",
+      "version": "10.4.2",
+      "purl": "pkg:pypi/mitmproxy@10.4.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mpmath@1.3.0",
+      "name": "mpmath",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/mpmath@1.3.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/msgpack@1.0.8",
+      "name": "msgpack",
+      "version": "1.0.8",
+      "purl": "pkg:pypi/msgpack@1.0.8",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mulpyplexer@0.9",
+      "name": "mulpyplexer",
+      "version": "0.9",
+      "purl": "pkg:pypi/mulpyplexer@0.9",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mypy-extensions@1.1.0",
+      "name": "mypy-extensions",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/mypy-extensions@1.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/mypy@2.1.0",
+      "name": "mypy",
+      "version": "2.1.0",
+      "purl": "pkg:pypi/mypy@2.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/nampa@0.1.1",
+      "name": "nampa",
+      "version": "0.1.1",
+      "purl": "pkg:pypi/nampa@0.1.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/networkx@3.6.1",
+      "name": "networkx",
+      "version": "3.6.1",
+      "purl": "pkg:pypi/networkx@3.6.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/numpy@2.5.1",
+      "name": "numpy",
+      "version": "2.5.1",
+      "purl": "pkg:pypi/numpy@2.5.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai-codex-cli-bin@0.137.0a4",
+      "name": "openai-codex-cli-bin",
+      "version": "0.137.0a4",
+      "purl": "pkg:pypi/openai-codex-cli-bin@0.137.0a4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai-codex@0.1.0b3",
+      "name": "openai-codex",
+      "version": "0.1.0b3",
+      "purl": "pkg:pypi/openai-codex@0.1.0b3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai@2.41.1",
+      "name": "openai",
+      "version": "2.41.1",
+      "purl": "pkg:pypi/openai@2.41.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai@2.46.0",
+      "name": "openai",
+      "version": "2.46.0",
+      "purl": "pkg:pypi/openai@2.46.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.42.1",
+      "name": "opentelemetry-api",
+      "version": "1.42.1",
+      "purl": "pkg:pypi/opentelemetry-api@1.42.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.43.0",
+      "name": "opentelemetry-api",
+      "version": "1.43.0",
+      "purl": "pkg:pypi/opentelemetry-api@1.43.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-exporter-otlp-proto-common@1.42.1",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "version": "1.42.1",
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp-proto-common@1.42.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.42.1",
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "version": "1.42.1",
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.42.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-proto@1.42.1",
+      "name": "opentelemetry-proto",
+      "version": "1.42.1",
+      "purl": "pkg:pypi/opentelemetry-proto@1.42.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-sdk@1.42.1",
+      "name": "opentelemetry-sdk",
+      "version": "1.42.1",
+      "purl": "pkg:pypi/opentelemetry-sdk@1.42.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-semantic-conventions@0.63b1",
+      "name": "opentelemetry-semantic-conventions",
+      "version": "0.63b1",
+      "purl": "pkg:pypi/opentelemetry-semantic-conventions@0.63b1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/outcome@1.3.0.post0",
+      "name": "outcome",
+      "version": "1.3.0.post0",
+      "purl": "pkg:pypi/outcome@1.3.0.post0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@25.0",
+      "name": "packaging",
+      "version": "25.0",
+      "purl": "pkg:pypi/packaging@25.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.2",
+      "name": "packaging",
+      "version": "26.2",
+      "purl": "pkg:pypi/packaging@26.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/paramiko@5.0.0",
+      "name": "paramiko",
+      "version": "5.0.0",
+      "purl": "pkg:pypi/paramiko@5.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/passlib@1.7.4",
+      "name": "passlib",
+      "version": "1.7.4",
+      "purl": "pkg:pypi/passlib@1.7.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pathspec@1.1.1",
+      "name": "pathspec",
+      "version": "1.1.1",
+      "purl": "pkg:pypi/pathspec@1.1.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pefile@2024.8.26",
+      "name": "pefile",
+      "version": "2024.8.26",
+      "purl": "pkg:pypi/pefile@2024.8.26",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@26.1.2",
+      "name": "pip",
+      "version": "26.1.2",
+      "purl": "pkg:pypi/pip@26.1.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pluggy@1.6.0",
+      "name": "pluggy",
+      "version": "1.6.0",
+      "purl": "pkg:pypi/pluggy@1.6.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/plumbum@2.0.1",
+      "name": "plumbum",
+      "version": "2.0.1",
+      "purl": "pkg:pypi/plumbum@2.0.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ply@3.11",
+      "name": "ply",
+      "version": "3.11",
+      "purl": "pkg:pypi/ply@3.11",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/prompt-toolkit@3.0.52",
+      "name": "prompt-toolkit",
+      "version": "3.0.52",
+      "purl": "pkg:pypi/prompt-toolkit@3.0.52",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/propcache@0.5.2",
+      "name": "propcache",
+      "version": "0.5.2",
+      "purl": "pkg:pypi/propcache@0.5.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@5.27.3",
+      "name": "protobuf",
+      "version": "5.27.3",
+      "purl": "pkg:pypi/protobuf@5.27.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@6.33.6",
+      "name": "protobuf",
+      "version": "6.33.6",
+      "purl": "pkg:pypi/protobuf@6.33.6",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@5.9.8",
+      "name": "psutil",
+      "version": "5.9.8",
+      "purl": "pkg:pypi/psutil@5.9.8",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/publicsuffix2@2.20191221",
+      "name": "publicsuffix2",
+      "version": "2.20191221",
+      "purl": "pkg:pypi/publicsuffix2@2.20191221",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pwntools@4.15.0",
+      "name": "pwntools",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/pwntools@4.15.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1-modules@0.4.2",
+      "name": "pyasn1-modules",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/pyasn1-modules@0.4.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1@0.6.3",
+      "name": "pyasn1",
+      "version": "0.6.3",
+      "purl": "pkg:pypi/pyasn1@0.6.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1@0.6.4",
+      "name": "pyasn1",
+      "version": "0.6.4",
+      "purl": "pkg:pypi/pyasn1@0.6.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycparser@3.0",
+      "name": "pycparser",
+      "version": "3.0",
+      "purl": "pkg:pypi/pycparser@3.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycryptodome@3.23.0",
+      "name": "pycryptodome",
+      "version": "3.23.0",
+      "purl": "pkg:pypi/pycryptodome@3.23.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-ai-slim@1.73.0",
+      "name": "pydantic-ai-slim",
+      "version": "1.73.0",
+      "purl": "pkg:pypi/pydantic-ai-slim@1.73.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-core@2.46.4",
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "purl": "pkg:pypi/pydantic-core@2.46.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-core@2.47.0",
+      "name": "pydantic-core",
+      "version": "2.47.0",
+      "purl": "pkg:pypi/pydantic-core@2.47.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-graph@1.73.0",
+      "name": "pydantic-graph",
+      "version": "1.73.0",
+      "purl": "pkg:pypi/pydantic-graph@1.73.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-settings@2.14.1",
+      "name": "pydantic-settings",
+      "version": "2.14.1",
+      "purl": "pkg:pypi/pydantic-settings@2.14.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-settings@2.14.2",
+      "name": "pydantic-settings",
+      "version": "2.14.2",
+      "purl": "pkg:pypi/pydantic-settings@2.14.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.13.4",
+      "name": "pydantic",
+      "version": "2.13.4",
+      "purl": "pkg:pypi/pydantic@2.13.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.14.0a1",
+      "name": "pydantic",
+      "version": "2.14.0a1",
+      "purl": "pkg:pypi/pydantic@2.14.0a1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydot@4.0.1",
+      "name": "pydot",
+      "version": "4.0.1",
+      "purl": "pkg:pypi/pydot@4.0.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyelftools@0.33",
+      "name": "pyelftools",
+      "version": "0.33",
+      "purl": "pkg:pypi/pyelftools@0.33",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyformlang@1.0.11",
+      "name": "pyformlang",
+      "version": "1.0.11",
+      "purl": "pkg:pypi/pyformlang@1.0.11",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pygments@2.20.0",
+      "name": "pygments",
+      "version": "2.20.0",
+      "purl": "pkg:pypi/pygments@2.20.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyjwt@2.13.0",
+      "name": "pyjwt",
+      "version": "2.13.0",
+      "purl": "pkg:pypi/pyjwt@2.13.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pylsqpack@0.3.24",
+      "name": "pylsqpack",
+      "version": "0.3.24",
+      "purl": "pkg:pypi/pylsqpack@0.3.24",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pynacl@1.6.2",
+      "name": "pynacl",
+      "version": "1.6.2",
+      "purl": "pkg:pypi/pynacl@1.6.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyopenssl@24.2.1",
+      "name": "pyopenssl",
+      "version": "24.2.1",
+      "purl": "pkg:pypi/pyopenssl@24.2.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyparsing@3.1.2",
+      "name": "pyparsing",
+      "version": "3.1.2",
+      "purl": "pkg:pypi/pyparsing@3.1.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyperclip@1.9.0",
+      "name": "pyperclip",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/pyperclip@1.9.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyserial@3.5",
+      "name": "pyserial",
+      "version": "3.5",
+      "purl": "pkg:pypi/pyserial@3.5",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pysocks@1.7.1",
+      "name": "pysocks",
+      "version": "1.7.1",
+      "purl": "pkg:pypi/pysocks@1.7.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-asyncio@1.4.0",
+      "name": "pytest-asyncio",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/pytest-asyncio@1.4.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@7.1.0",
+      "name": "pytest-cov",
+      "version": "7.1.0",
+      "purl": "pkg:pypi/pytest-cov@7.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.0.3",
+      "name": "pytest",
+      "version": "9.0.3",
+      "purl": "pkg:pypi/pytest@9.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.1.1",
+      "name": "pytest",
+      "version": "9.1.1",
+      "purl": "pkg:pypi/pytest@9.1.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dotenv@1.2.2",
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "purl": "pkg:pypi/python-dotenv@1.2.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-multipart@0.0.32",
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "purl": "pkg:pypi/python-multipart@0.0.32",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyvex@9.2.120",
+      "name": "pyvex",
+      "version": "9.2.120",
+      "purl": "pkg:pypi/pyvex@9.2.120",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pywin32@312",
+      "name": "pywin32",
+      "version": "312",
+      "purl": "pkg:pypi/pywin32@312",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3",
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/referencing@0.37.0",
+      "name": "referencing",
+      "version": "0.37.0",
+      "purl": "pkg:pypi/referencing@0.37.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/regex@2026.7.19",
+      "name": "regex",
+      "version": "2026.7.19",
+      "purl": "pkg:pypi/regex@2026.7.19",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.34.2",
+      "name": "requests",
+      "version": "2.34.2",
+      "purl": "pkg:pypi/requests@2.34.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/rich@15.0.0",
+      "name": "rich",
+      "version": "15.0.0",
+      "purl": "pkg:pypi/rich@15.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ropgadget@7.7",
+      "name": "ropgadget",
+      "version": "7.7",
+      "purl": "pkg:pypi/ropgadget@7.7",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/rpds-py@2026.5.1",
+      "name": "rpds-py",
+      "version": "2026.5.1",
+      "purl": "pkg:pypi/rpds-py@2026.5.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/rpds-py@2026.6.3",
+      "name": "rpds-py",
+      "version": "2026.6.3",
+      "purl": "pkg:pypi/rpds-py@2026.6.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/rpyc@6.0.2",
+      "name": "rpyc",
+      "version": "6.0.2",
+      "purl": "pkg:pypi/rpyc@6.0.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruamel-yaml-clib@0.2.15",
+      "name": "ruamel-yaml-clib",
+      "version": "0.2.15",
+      "purl": "pkg:pypi/ruamel-yaml-clib@0.2.15",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruamel-yaml@0.18.6",
+      "name": "ruamel-yaml",
+      "version": "0.18.6",
+      "purl": "pkg:pypi/ruamel-yaml@0.18.6",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff@0.15.17",
+      "name": "ruff",
+      "version": "0.15.17",
+      "purl": "pkg:pypi/ruff@0.15.17",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff@0.15.22",
+      "name": "ruff",
+      "version": "0.15.22",
+      "purl": "pkg:pypi/ruff@0.15.22",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/s3transfer@0.19.1",
+      "name": "s3transfer",
+      "version": "0.19.1",
+      "purl": "pkg:pypi/s3transfer@0.19.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/selenium@4.46.0",
+      "name": "selenium",
+      "version": "4.46.0",
+      "purl": "pkg:pypi/selenium@4.46.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/service-identity@24.2.0",
+      "name": "service-identity",
+      "version": "24.2.0",
+      "purl": "pkg:pypi/service-identity@24.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/shellingham@1.5.4",
+      "name": "shellingham",
+      "version": "1.5.4",
+      "purl": "pkg:pypi/shellingham@1.5.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/smmap@5.0.3",
+      "name": "smmap",
+      "version": "5.0.3",
+      "purl": "pkg:pypi/smmap@5.0.3",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/sniffio@1.3.1",
+      "name": "sniffio",
+      "version": "1.3.1",
+      "purl": "pkg:pypi/sniffio@1.3.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/sortedcontainers@2.4.0",
+      "name": "sortedcontainers",
+      "version": "2.4.0",
+      "purl": "pkg:pypi/sortedcontainers@2.4.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/soupsieve@2.9",
+      "name": "soupsieve",
+      "version": "2.9",
+      "purl": "pkg:pypi/soupsieve@2.9",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/sse-starlette@3.4.4",
+      "name": "sse-starlette",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/sse-starlette@3.4.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/sse-starlette@3.4.6",
+      "name": "sse-starlette",
+      "version": "3.4.6",
+      "purl": "pkg:pypi/sse-starlette@3.4.6",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/starlette@1.3.1",
+      "name": "starlette",
+      "version": "1.3.1",
+      "purl": "pkg:pypi/starlette@1.3.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/sympy@1.14.0",
+      "name": "sympy",
+      "version": "1.14.0",
+      "purl": "pkg:pypi/sympy@1.14.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tenacity@9.1.4",
+      "name": "tenacity",
+      "version": "9.1.4",
+      "purl": "pkg:pypi/tenacity@9.1.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tibs@0.5.7",
+      "name": "tibs",
+      "version": "0.5.7",
+      "purl": "pkg:pypi/tibs@0.5.7",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.13.0",
+      "name": "tiktoken",
+      "version": "0.13.0",
+      "purl": "pkg:pypi/tiktoken@0.13.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tornado@6.4.1",
+      "name": "tornado",
+      "version": "6.4.1",
+      "purl": "pkg:pypi/tornado@6.4.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tqdm@4.68.2",
+      "name": "tqdm",
+      "version": "4.68.2",
+      "purl": "pkg:pypi/tqdm@4.68.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/tqdm@4.69.0",
+      "name": "tqdm",
+      "version": "4.69.0",
+      "purl": "pkg:pypi/tqdm@4.69.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/trio-websocket@0.12.2",
+      "name": "trio-websocket",
+      "version": "0.12.2",
+      "purl": "pkg:pypi/trio-websocket@0.12.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/trio@0.33.0",
+      "name": "trio",
+      "version": "0.33.0",
+      "purl": "pkg:pypi/trio@0.33.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/truststore@0.10.4",
+      "name": "truststore",
+      "version": "0.10.4",
+      "purl": "pkg:pypi/truststore@0.10.4",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/ty@0.0.61",
+      "name": "ty",
+      "version": "0.0.61",
+      "purl": "pkg:pypi/ty@0.0.61",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/typer@0.27.0",
+      "name": "typer",
+      "version": "0.27.0",
+      "purl": "pkg:pypi/typer@0.27.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.16.0",
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "purl": "pkg:pypi/typing-extensions@4.16.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2",
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/unicorn@2.0.1.post1",
+      "name": "unicorn",
+      "version": "2.0.1.post1",
+      "purl": "pkg:pypi/unicorn@2.0.1.post1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/unique-log-filter@0.1.0",
+      "name": "unique-log-filter",
+      "version": "0.1.0",
+      "purl": "pkg:pypi/unique-log-filter@0.1.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/unix-ar@0.2.1",
+      "name": "unix-ar",
+      "version": "0.2.1",
+      "purl": "pkg:pypi/unix-ar@0.2.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.7.0",
+      "name": "urllib3",
+      "version": "2.7.0",
+      "purl": "pkg:pypi/urllib3@2.7.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,upstream/pentestgpt/uv.lock,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/urwid@2.6.15",
+      "name": "urwid",
+      "version": "2.6.15",
+      "purl": "pkg:pypi/urwid@2.6.15",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvicorn@0.49.0",
+      "name": "uvicorn",
+      "version": "0.49.0",
+      "purl": "pkg:pypi/uvicorn@0.49.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvicorn@0.51.0",
+      "name": "uvicorn",
+      "version": "0.51.0",
+      "purl": "pkg:pypi/uvicorn@0.51.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/wcwidth@0.8.1",
+      "name": "wcwidth",
+      "version": "0.8.1",
+      "purl": "pkg:pypi/wcwidth@0.8.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/wcwidth@0.8.2",
+      "name": "wcwidth",
+      "version": "0.8.2",
+      "purl": "pkg:pypi/wcwidth@0.8.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/webdriver-manager@4.1.2",
+      "name": "webdriver-manager",
+      "version": "4.1.2",
+      "purl": "pkg:pypi/webdriver-manager@4.1.2",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/websocket-client@1.9.0",
+      "name": "websocket-client",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/websocket-client@1.9.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/websockets@16.0",
+      "name": "websockets",
+      "version": "16.0",
+      "purl": "pkg:pypi/websockets@16.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/websockets@16.1.1",
+      "name": "websockets",
+      "version": "16.1.1",
+      "purl": "pkg:pypi/websockets@16.1.1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/werkzeug@3.1.8",
+      "name": "werkzeug",
+      "version": "3.1.8",
+      "purl": "pkg:pypi/werkzeug@3.1.8",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/win32-setctime@1.2.0",
+      "name": "win32-setctime",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/win32-setctime@1.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/wrapt@1.17.4rc1",
+      "name": "wrapt",
+      "version": "1.17.4rc1",
+      "purl": "pkg:pypi/wrapt@1.17.4rc1",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "upstream/pentestgpt/uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/wsproto@1.2.0",
+      "name": "wsproto",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/wsproto@1.2.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/yarl@1.24.5",
+      "name": "yarl",
+      "version": "1.24.5",
+      "purl": "pkg:pypi/yarl@1.24.5",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt,uv.lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/z3-solver@4.13.0.0",
+      "name": "z3-solver",
+      "version": "4.13.0.0",
+      "purl": "pkg:pypi/z3-solver@4.13.0.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/zstandard@0.23.0",
+      "name": "zstandard",
+      "version": "0.23.0",
+      "purl": "pkg:pypi/zstandard@0.23.0",
+      "properties": [
+        {
+          "name": "ctf-agent:dependency-lock",
+          "value": "third_party/locks/hexstrike-requirements.lock.txt"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "urn:ctf-agent:product",
+      "dependsOn": [
+        "pkg:github/verialabs/ctf-agent@3366d569557c4fda3fd153040632de65e255396d",
+        "pkg:github/GreyDGL/PentestGPT@e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+        "pkg:github/0x4m4/hexstrike-ai@9b8c780f324ce5145a322bfa23c98886f8424ba3",
+        "docker.io/library/python:3.14.6-slim-bookworm@sha256:86f975aca15cf04a40b399eebede9aea7c82eae084d1f1a0a6ef6bcaae871a30",
+        "docker.io/library/python:3.12.11-slim-bookworm@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+        "pkg:github/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
+      ]
+    },
+    {
+      "ref": "pkg:github/0x4m4/hexstrike-ai@9b8c780f324ce5145a322bfa23c98886f8424ba3",
+      "dependsOn": [
+        "pkg:pypi/ailment@9.2.120",
+        "pkg:pypi/aiohappyeyeballs@2.7.1",
+        "pkg:pypi/aiohttp@3.14.1",
+        "pkg:pypi/aioquic@1.2.0",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/angr@9.2.120",
+        "pkg:pypi/annotated-doc@0.0.4",
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/anyio@4.14.2",
+        "pkg:pypi/archinfo@9.2.120",
+        "pkg:pypi/asgiref@3.8.1",
+        "pkg:pypi/attrs@26.1.0",
+        "pkg:pypi/bcrypt@4.0.1",
+        "pkg:pypi/beautifulsoup4@4.15.0",
+        "pkg:pypi/bitarray@3.9.1",
+        "pkg:pypi/bitstring@4.4.0",
+        "pkg:pypi/blinker@1.9.0",
+        "pkg:pypi/brotli@1.1.0",
+        "pkg:pypi/cachetools@7.1.4",
+        "pkg:pypi/capstone@5.0.3",
+        "pkg:pypi/cart@1.2.3",
+        "pkg:pypi/certifi@2026.6.17",
+        "pkg:pypi/cffi@2.1.0",
+        "pkg:pypi/charset-normalizer@3.4.9",
+        "pkg:pypi/claripy@9.2.120",
+        "pkg:pypi/cle@9.2.120",
+        "pkg:pypi/click@8.4.2",
+        "pkg:pypi/colored-traceback@0.4.2",
+        "pkg:pypi/cppheaderparser@2.7.4",
+        "pkg:pypi/cryptography@43.0.3",
+        "pkg:pypi/fastmcp@0.4.1",
+        "pkg:pypi/flask@3.0.3",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/future@1.0.0",
+        "pkg:pypi/gitdb@4.0.12",
+        "pkg:pypi/gitpython@3.1.53",
+        "pkg:pypi/h11@0.14.0",
+        "pkg:pypi/h2@4.1.0",
+        "pkg:pypi/hpack@4.2.0",
+        "pkg:pypi/httpcore@1.0.8",
+        "pkg:pypi/httpx-sse@0.4.3",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/hyperframe@6.0.1",
+        "pkg:pypi/idna@3.18",
+        "pkg:pypi/intervaltree@3.2.1",
+        "pkg:pypi/invoke@3.0.3",
+        "pkg:pypi/itanium-demangler@1.1",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/jsonschema-specifications@2025.9.1",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/kaitaistruct@0.10",
+        "pkg:pypi/ldap3@2.9.1",
+        "pkg:pypi/mako@1.3.12",
+        "pkg:pypi/markdown-it-py@4.2.0",
+        "pkg:pypi/markupsafe@3.0.3",
+        "pkg:pypi/mcp@1.28.1",
+        "pkg:pypi/mdurl@0.1.2",
+        "pkg:pypi/mitmproxy-rs@0.6.3",
+        "pkg:pypi/mitmproxy@10.4.2",
+        "pkg:pypi/mpmath@1.3.0",
+        "pkg:pypi/msgpack@1.0.8",
+        "pkg:pypi/mulpyplexer@0.9",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/nampa@0.1.1",
+        "pkg:pypi/networkx@3.6.1",
+        "pkg:pypi/numpy@2.5.1",
+        "pkg:pypi/outcome@1.3.0.post0",
+        "pkg:pypi/packaging@26.2",
+        "pkg:pypi/paramiko@5.0.0",
+        "pkg:pypi/passlib@1.7.4",
+        "pkg:pypi/pefile@2024.8.26",
+        "pkg:pypi/pip@26.1.2",
+        "pkg:pypi/plumbum@2.0.1",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/propcache@0.5.2",
+        "pkg:pypi/protobuf@5.27.3",
+        "pkg:pypi/psutil@5.9.8",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pwntools@4.15.0",
+        "pkg:pypi/pyasn1-modules@0.4.2",
+        "pkg:pypi/pyasn1@0.6.4",
+        "pkg:pypi/pycparser@3.0",
+        "pkg:pypi/pycryptodome@3.23.0",
+        "pkg:pypi/pydantic-core@2.46.4",
+        "pkg:pypi/pydantic-settings@2.14.2",
+        "pkg:pypi/pydantic@2.13.4",
+        "pkg:pypi/pydot@4.0.1",
+        "pkg:pypi/pyelftools@0.33",
+        "pkg:pypi/pyformlang@1.0.11",
+        "pkg:pypi/pygments@2.20.0",
+        "pkg:pypi/pyjwt@2.13.0",
+        "pkg:pypi/pylsqpack@0.3.24",
+        "pkg:pypi/pynacl@1.6.2",
+        "pkg:pypi/pyopenssl@24.2.1",
+        "pkg:pypi/pyparsing@3.1.2",
+        "pkg:pypi/pyperclip@1.9.0",
+        "pkg:pypi/pyserial@3.5",
+        "pkg:pypi/pysocks@1.7.1",
+        "pkg:pypi/python-dateutil@2.9.0.post0",
+        "pkg:pypi/python-dotenv@1.2.2",
+        "pkg:pypi/python-multipart@0.0.32",
+        "pkg:pypi/pyvex@9.2.120",
+        "pkg:pypi/referencing@0.37.0",
+        "pkg:pypi/requests@2.34.2",
+        "pkg:pypi/rich@15.0.0",
+        "pkg:pypi/ropgadget@7.7",
+        "pkg:pypi/rpds-py@2026.6.3",
+        "pkg:pypi/rpyc@6.0.2",
+        "pkg:pypi/ruamel-yaml-clib@0.2.15",
+        "pkg:pypi/ruamel-yaml@0.18.6",
+        "pkg:pypi/selenium@4.46.0",
+        "pkg:pypi/service-identity@24.2.0",
+        "pkg:pypi/shellingham@1.5.4",
+        "pkg:pypi/six@1.17.0",
+        "pkg:pypi/smmap@5.0.3",
+        "pkg:pypi/sniffio@1.3.1",
+        "pkg:pypi/sortedcontainers@2.4.0",
+        "pkg:pypi/soupsieve@2.9",
+        "pkg:pypi/sse-starlette@3.4.6",
+        "pkg:pypi/starlette@1.3.1",
+        "pkg:pypi/sympy@1.14.0",
+        "pkg:pypi/tibs@0.5.7",
+        "pkg:pypi/tornado@6.4.1",
+        "pkg:pypi/trio-websocket@0.12.2",
+        "pkg:pypi/trio@0.33.0",
+        "pkg:pypi/typer@0.27.0",
+        "pkg:pypi/typing-extensions@4.16.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/unicorn@2.0.1.post1",
+        "pkg:pypi/unique-log-filter@0.1.0",
+        "pkg:pypi/unix-ar@0.2.1",
+        "pkg:pypi/urllib3@2.7.0",
+        "pkg:pypi/urwid@2.6.15",
+        "pkg:pypi/uvicorn@0.51.0",
+        "pkg:pypi/wcwidth@0.8.2",
+        "pkg:pypi/webdriver-manager@4.1.2",
+        "pkg:pypi/websocket-client@1.9.0",
+        "pkg:pypi/werkzeug@3.1.8",
+        "pkg:pypi/wsproto@1.2.0",
+        "pkg:pypi/yarl@1.24.5",
+        "pkg:pypi/z3-solver@4.13.0.0",
+        "pkg:pypi/zstandard@0.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:github/GreyDGL/PentestGPT@e8b1bb77d1ac00329675cec3b060aba971ec1ac8",
+      "dependsOn": [
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/anthropic@0.109.1",
+        "pkg:pypi/anyio@4.13.0",
+        "pkg:pypi/ast-serialize@0.5.0",
+        "pkg:pypi/attrs@26.1.0",
+        "pkg:pypi/backoff@2.2.1",
+        "pkg:pypi/certifi@2026.5.20",
+        "pkg:pypi/cffi@2.0.0",
+        "pkg:pypi/charset-normalizer@3.4.7",
+        "pkg:pypi/claude-agent-sdk@0.2.101",
+        "pkg:pypi/click@8.4.1",
+        "pkg:pypi/colorama@0.4.6",
+        "pkg:pypi/coverage@7.14.1",
+        "pkg:pypi/cryptography@49.0.0",
+        "pkg:pypi/distro@1.9.0",
+        "pkg:pypi/docstring-parser@0.18.0",
+        "pkg:pypi/google-auth@2.54.0",
+        "pkg:pypi/google-genai@2.8.0",
+        "pkg:pypi/googleapis-common-protos@1.75.0",
+        "pkg:pypi/h11@0.16.0",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/httpx-sse@0.4.3",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/idna@3.18",
+        "pkg:pypi/iniconfig@2.3.0",
+        "pkg:pypi/jiter@0.15.0",
+        "pkg:pypi/jsonschema-specifications@2025.9.1",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/langfuse@4.8.0b1",
+        "pkg:pypi/librt@0.11.0",
+        "pkg:pypi/loguru@0.7.3",
+        "pkg:pypi/markdown-it-py@4.2.0",
+        "pkg:pypi/mcp@1.27.2",
+        "pkg:pypi/mdurl@0.1.2",
+        "pkg:pypi/mypy-extensions@1.1.0",
+        "pkg:pypi/mypy@2.1.0",
+        "pkg:pypi/openai-codex-cli-bin@0.137.0a4",
+        "pkg:pypi/openai-codex@0.1.0b3",
+        "pkg:pypi/openai@2.41.1",
+        "pkg:pypi/opentelemetry-api@1.42.1",
+        "pkg:pypi/opentelemetry-exporter-otlp-proto-common@1.42.1",
+        "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.42.1",
+        "pkg:pypi/opentelemetry-proto@1.42.1",
+        "pkg:pypi/opentelemetry-sdk@1.42.1",
+        "pkg:pypi/opentelemetry-semantic-conventions@0.63b1",
+        "pkg:pypi/packaging@26.2",
+        "pkg:pypi/pathspec@1.1.1",
+        "pkg:pypi/pluggy@1.6.0",
+        "pkg:pypi/prompt-toolkit@3.0.52",
+        "pkg:pypi/protobuf@6.33.6",
+        "pkg:pypi/pyasn1-modules@0.4.2",
+        "pkg:pypi/pyasn1@0.6.3",
+        "pkg:pypi/pycparser@3.0",
+        "pkg:pypi/pydantic-core@2.47.0",
+        "pkg:pypi/pydantic-settings@2.14.1",
+        "pkg:pypi/pydantic@2.14.0a1",
+        "pkg:pypi/pygments@2.20.0",
+        "pkg:pypi/pyjwt@2.13.0",
+        "pkg:pypi/pytest-asyncio@1.4.0",
+        "pkg:pypi/pytest-cov@7.1.0",
+        "pkg:pypi/pytest@9.0.3",
+        "pkg:pypi/python-dotenv@1.2.2",
+        "pkg:pypi/python-multipart@0.0.32",
+        "pkg:pypi/pywin32@312",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/referencing@0.37.0",
+        "pkg:pypi/requests@2.34.2",
+        "pkg:pypi/rich@15.0.0",
+        "pkg:pypi/rpds-py@2026.5.1",
+        "pkg:pypi/ruff@0.15.17",
+        "pkg:pypi/sniffio@1.3.1",
+        "pkg:pypi/sse-starlette@3.4.4",
+        "pkg:pypi/starlette@1.3.1",
+        "pkg:pypi/tenacity@9.1.4",
+        "pkg:pypi/tqdm@4.68.2",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/urllib3@2.7.0",
+        "pkg:pypi/uvicorn@0.49.0",
+        "pkg:pypi/wcwidth@0.8.1",
+        "pkg:pypi/websockets@16.0",
+        "pkg:pypi/win32-setctime@1.2.0",
+        "pkg:pypi/wrapt@1.17.4rc1"
+      ]
+    },
+    {
+      "ref": "pkg:github/verialabs/ctf-agent@3366d569557c4fda3fd153040632de65e255396d",
+      "dependsOn": [
+        "pkg:pypi/aiodocker@0.27.0",
+        "pkg:pypi/aiohappyeyeballs@2.7.1",
+        "pkg:pypi/aiohttp@3.14.1",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/anyio@4.14.2",
+        "pkg:pypi/attrs@26.1.0",
+        "pkg:pypi/beautifulsoup4@4.15.0",
+        "pkg:pypi/boto3@1.43.51",
+        "pkg:pypi/botocore@1.43.51",
+        "pkg:pypi/certifi@2026.6.17",
+        "pkg:pypi/cffi@2.1.0",
+        "pkg:pypi/charset-normalizer@3.4.9",
+        "pkg:pypi/claude-agent-sdk@0.2.123",
+        "pkg:pypi/click@8.4.2",
+        "pkg:pypi/colorama@0.4.6",
+        "pkg:pypi/cryptography@49.0.0",
+        "pkg:pypi/distro@1.9.0",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/genai-prices@0.0.71",
+        "pkg:pypi/google-auth@2.55.2",
+        "pkg:pypi/google-genai@2.12.1",
+        "pkg:pypi/griffelib@2.1.0",
+        "pkg:pypi/h11@0.16.0",
+        "pkg:pypi/httpcore2@2.7.0",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/httpx-sse@0.4.3",
+        "pkg:pypi/httpx2@2.7.0",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/idna@3.18",
+        "pkg:pypi/iniconfig@2.3.0",
+        "pkg:pypi/jiter@0.16.0",
+        "pkg:pypi/jmespath@1.1.0",
+        "pkg:pypi/jsonschema-specifications@2025.9.1",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/logfire-api@4.38.0",
+        "pkg:pypi/markdown-it-py@4.2.0",
+        "pkg:pypi/markdownify@1.2.3",
+        "pkg:pypi/mcp@1.28.1",
+        "pkg:pypi/mdurl@0.1.2",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/openai@2.46.0",
+        "pkg:pypi/opentelemetry-api@1.43.0",
+        "pkg:pypi/packaging@25.0",
+        "pkg:pypi/pluggy@1.6.0",
+        "pkg:pypi/propcache@0.5.2",
+        "pkg:pypi/pyasn1-modules@0.4.2",
+        "pkg:pypi/pyasn1@0.6.4",
+        "pkg:pypi/pycparser@3.0",
+        "pkg:pypi/pydantic-ai-slim@1.73.0",
+        "pkg:pypi/pydantic-core@2.46.4",
+        "pkg:pypi/pydantic-graph@1.73.0",
+        "pkg:pypi/pydantic-settings@2.14.2",
+        "pkg:pypi/pydantic@2.13.4",
+        "pkg:pypi/pygments@2.20.0",
+        "pkg:pypi/pyjwt@2.13.0",
+        "pkg:pypi/pytest-asyncio@1.4.0",
+        "pkg:pypi/pytest@9.1.1",
+        "pkg:pypi/python-dateutil@2.9.0.post0",
+        "pkg:pypi/python-dotenv@1.2.2",
+        "pkg:pypi/python-multipart@0.0.32",
+        "pkg:pypi/pywin32@312",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/referencing@0.37.0",
+        "pkg:pypi/regex@2026.7.19",
+        "pkg:pypi/requests@2.34.2",
+        "pkg:pypi/rich@15.0.0",
+        "pkg:pypi/rpds-py@2026.6.3",
+        "pkg:pypi/ruff@0.15.22",
+        "pkg:pypi/s3transfer@0.19.1",
+        "pkg:pypi/six@1.17.0",
+        "pkg:pypi/sniffio@1.3.1",
+        "pkg:pypi/soupsieve@2.9",
+        "pkg:pypi/sse-starlette@3.4.6",
+        "pkg:pypi/starlette@1.3.1",
+        "pkg:pypi/tenacity@9.1.4",
+        "pkg:pypi/tiktoken@0.13.0",
+        "pkg:pypi/tqdm@4.69.0",
+        "pkg:pypi/truststore@0.10.4",
+        "pkg:pypi/ty@0.0.61",
+        "pkg:pypi/typing-extensions@4.16.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/urllib3@2.7.0",
+        "pkg:pypi/uvicorn@0.51.0",
+        "pkg:pypi/websockets@16.1.1",
+        "pkg:pypi/yarl@1.24.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "policy": "Every copied or adapted upstream path must be registered here before merge.",
+  "entries": [
+    {
+      "destination": "backend/**",
+      "source_component": "veria-ctf-agent",
+      "source_path": "backend/**",
+      "source_commit": "3366d569557c4fda3fd153040632de65e255396d",
+      "license": "MIT",
+      "status": "inherited-from-fork"
+    },
+    {
+      "destination": "sandbox/**",
+      "source_component": "veria-ctf-agent",
+      "source_path": "sandbox/**",
+      "source_commit": "3366d569557c4fda3fd153040632de65e255396d",
+      "license": "MIT",
+      "status": "inherited-from-fork"
+    },
+    {
+      "destination": "pull_challenges.py",
+      "source_component": "veria-ctf-agent",
+      "source_path": "pull_challenges.py",
+      "source_commit": "3366d569557c4fda3fd153040632de65e255396d",
+      "license": "MIT",
+      "status": "inherited-from-fork",
+      "secondary_attribution": "https://github.com/es3n1n/Eruditus"
+    },
+    {
+      "destination": "pyproject.toml",
+      "source_component": "veria-ctf-agent",
+      "source_path": "pyproject.toml",
+      "source_commit": "3366d569557c4fda3fd153040632de65e255396d",
+      "license": "MIT",
+      "status": "modified-in-fork"
+    }
+  ]
+}
