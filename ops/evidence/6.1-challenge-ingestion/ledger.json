@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task": "6.1 challenge ingestion",
+  "status": "complete",
+  "current_stage": "verified",
+  "verified_at": "2026-07-21T15:07:36.3702504+08:00",
+  "checkpoint": "local and CTFd intake share the domain model, artifact storage is content-addressed and traceable, and SolverRun creation passed",
+  "implementation_revision": "9d07c81699bba8c60549f41ce105f72255dd93fa",
+  "schema_revision": "20260721_0003",
+  "local_verification": {
+    "pytest": "46 passed",
+    "ruff": "passed for full repository",
+    "ty": "passed for backend/db and backend/ingestion",
+    "sqlite_upgrade_downgrade": "passed",
+    "alembic_model_drift": "passed",
+    "credential_scan": "provided platform session absent from repository"
+  },
+  "ctfd_mock_verification": {
+    "token_authentication": "passed",
+    "username_password_authentication": "passed",
+    "paginated_list_and_detail_fetch": "passed",
+    "hidden_challenge_filter": "passed",
+    "dictionary_attachment_entry": "passed",
+    "attachment_download": "passed",
+    "repeat_sync": "one challenge and one artifact retained",
+    "solver_run_creation": "passed"
+  },
+  "runtime_verification": {
+    "readyz": "postgres, redis, writable storage, and schema revision ready",
+    "compose_services": "api, worker, web, postgres, redis, and litellm healthy",
+    "filesystem": "/dev/sdd ext4",
+    "windows_api": "http://127.0.0.1:8080",
+    "windows_web": "http://127.0.0.1:3000",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU detected"
+  },
+  "local_fixture": {
+    "source": "F:\\ctf exercise\\AI×Cybersecurity_attachments\\SimpleSocket_9a42a2de5b8929f2093958257fdffc2a.zip",
+    "competition_id": "58ce65b7-9b69-45c0-aaf5-1722cf9b7e28",
+    "challenge_id": "ed93d728-9cb0-413c-99cd-f5ed40186b46",
+    "artifact_id": "a00d6a14-4e49-4623-a2d7-d3c4895a0935",
+    "solver_run_id": "35a7a09f-3138-4d3b-a4bd-c12a173d4807",
+    "challenge_status": "ingested",
+    "solver_run_status": "queued",
+    "content_type": "application/zip",
+    "size_bytes": 2157,
+    "sha256": "a32c833462f83ed678f7f32a18f8000847b93f98e1f7413900ddbe5225831b03",
+    "idempotent_replay": "duplicate=true and one physical file retained",
+    "storage_key": "ed93d728-9cb0-413c-99cd-f5ed40186b46/ea08685a67dd4da7a9be95099c27054c-SimpleSocket_9a42a2de5b8929f2093958257fdffc2a.zip"
+  },
+  "next_actions": []
+}
