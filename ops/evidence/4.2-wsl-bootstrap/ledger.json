@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task": "4.2 WSL foundation environment",
+  "status": "complete",
+  "current_stage": "verified",
+  "checkpoint": "all services, localhost access, host and container GPU, WSL restart persistence, and isolated backup restore verified",
+  "completed_at": "2026-07-21T04:22:43Z",
+  "target": {
+    "distribution": "Ubuntu-24.04",
+    "vhdx": "F:\\WSL\\Ubuntu-24.04\\ext4.vhdx",
+    "backup_root": "F:\\CTF-Agent-Backups",
+    "service_root": "/srv/ctf-platform"
+  },
+  "observed": {
+    "distribution": "Ubuntu-24.04",
+    "vhdx": "F:\\WSL\\Ubuntu-24.04\\ext4.vhdx",
+    "vhdx_bytes": 40904949760,
+    "host_memory_bytes": 16844886016,
+    "host_logical_processors": 32,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_driver": "576.88",
+    "gpu_memory_mib": 8188,
+    "f_drive_free_bytes": 329334722560,
+    "distribution_release": "Ubuntu 24.04.4 LTS",
+    "distribution_kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "root_filesystem": "/dev/sdd ext4",
+    "systemd_state": "running"
+  },
+  "resource_limits": {
+    "memory": "10GB",
+    "processors": 12,
+    "swap": "4GB",
+    "swap_file": "F:\\WSL\\wsl-swap.vhdx",
+    "localhost_forwarding": true
+  },
+  "rollback_artifact": {
+    "path": "F:\\CTF-Agent-Backups\\wsl\\UbuntuE-pre-4.2-20260721.tar.gz",
+    "bytes": 16717568000,
+    "sha256": "2DFA4B1CDEC4AE0C366C41375146D2FDC22255362053D98F6BBAF13699B7DA64",
+    "archive_listing_verified": true
+  },
+  "scope_notes": [
+    "Reserve the model directory and port 8001 only; model weights are out of scope.",
+    "Keep active source, databases, artifacts, checkpoints, and Docker data on WSL ext4.",
+    "Use /mnt/f only for exports, compressed backups, and offline archives."
+  ],
+  "result_evidence": "ops/evidence/4.2-wsl-bootstrap/verification.json",
+  "next_actions": []
+}

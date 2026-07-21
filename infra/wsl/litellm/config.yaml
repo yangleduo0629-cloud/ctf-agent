@@ -1,0 +1,13 @@
+model_list:
+  - model_name: local-27b
+    litellm_params:
+      model: openai/local-27b
+      api_base: os.environ/LOCAL_MODEL_API_BASE
+      api_key: os.environ/LOCAL_MODEL_API_KEY
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  disable_spend_logs: true
+
+litellm_settings:
+  drop_params: true
