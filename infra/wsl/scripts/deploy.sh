@@ -36,9 +36,10 @@ chmod 0600 "${ENV_FILE}"
 install -d -o 999 -g 999 -m 0750 \
   /srv/ctf-platform/data/postgres \
   /srv/ctf-platform/data/redis
-install -d -o ctf-platform -g ctf-platform -m 2770 \
+install -d -o ctf-platform -g 65532 -m 2770 \
   /srv/ctf-platform/data/artifacts \
-  /srv/ctf-platform/data/checkpoints \
+  /srv/ctf-platform/data/checkpoints
+install -d -o ctf-platform -g ctf-platform -m 2770 \
   /srv/ctf-platform/models
 
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" config --quiet

@@ -40,6 +40,15 @@ def test_persistent_mounts_stay_on_wsl_ext4_paths() -> None:
     assert all(not volume.startswith("/mnt/") for volume in volumes)
 
 
+def test_api_storage_directories_are_writable_by_the_container_group() -> None:
+    bootstrap = (INFRA / "scripts" / "bootstrap.sh").read_text(encoding="utf-8")
+    deploy = (INFRA / "scripts" / "deploy.sh").read_text(encoding="utf-8")
+    application = (INFRA / "api" / "app" / "main.py").read_text(encoding="utf-8")
+    for script in (bootstrap, deploy):
+        assert "install -d -o ctf-platform -g 65532 -m 2770" in script
+    assert "path.is_dir() and os.access(path, os.W_OK)" in application
+
+
 def test_database_and_cache_use_internal_network() -> None:
     compose = load_compose()
     assert compose["networks"]["backend"]["internal"] is True

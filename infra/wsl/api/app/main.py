@@ -91,5 +91,8 @@ async def readyz() -> dict[str, object]:
             "redis": redis_ready,
             "schema_revision": schema_revision,
         },
-        "storage": {name: path.is_dir() for name, path in paths.items()},
+        "storage": {
+            name: path.is_dir() and os.access(path, os.W_OK)
+            for name, path in paths.items()
+        },
     }

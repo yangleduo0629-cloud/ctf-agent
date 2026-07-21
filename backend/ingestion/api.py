@@ -254,3 +254,5 @@ async def _catalog_call(function, *args, **kwargs):
         raise HTTPException(status_code=409, detail="resource already exists") from exc
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except OSError as exc:
+        raise HTTPException(status_code=500, detail="artifact storage operation failed") from exc
