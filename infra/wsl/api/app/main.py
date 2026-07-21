@@ -22,12 +22,13 @@ async def healthz() -> dict[str, str]:
 
 @app.get("/readyz")
 async def readyz() -> dict[str, object]:
-    database_url = os.environ["DATABASE_URL"]
+    database_url = os.environ["ASYNC_DATABASE_URL"]
     redis_url = os.environ["REDIS_URL"]
 
     connection = await asyncpg.connect(database_url, timeout=5)
     try:
         database_ready = await connection.fetchval("SELECT 1") == 1
+        schema_revision = await connection.fetchval("SELECT version_num FROM alembic_version")
     finally:
         await connection.close()
 
@@ -43,6 +44,10 @@ async def readyz() -> dict[str, object]:
     }
     return {
         "status": "ready",
-        "dependencies": {"postgres": database_ready, "redis": redis_ready},
+        "dependencies": {
+            "postgres": database_ready,
+            "redis": redis_ready,
+            "schema_revision": schema_revision,
+        },
         "storage": {name: path.is_dir() for name, path in paths.items()},
     }

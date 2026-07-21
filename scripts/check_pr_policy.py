@@ -6,16 +6,22 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
+from collections.abc import Iterable
 
+# The SBOM is generated from both these inputs and the product uv.lock. Its
+# integrity is checked separately; branch policy protects authoritative inputs.
 PROTECTED = (
     ".gitmodules",
     "UPSTREAMS.lock.json",
     "THIRD_PARTY_NOTICES.md",
-    "sbom/upstreams.cdx.json",
     "third_party/reuse.json",
     "upstream/hexstrike-ai",
     "upstream/pentestgpt",
 )
+
+
+def protected_changes(changed: Iterable[str]) -> list[str]:
+    return sorted(set(changed).intersection(PROTECTED))
 
 
 def main() -> int:
@@ -31,8 +37,7 @@ def main() -> int:
         text=True,
         encoding="utf-8",
     )
-    changed = set(result.stdout.splitlines())
-    protected_changed = sorted(changed.intersection(PROTECTED))
+    protected_changed = protected_changes(result.stdout.splitlines())
     if protected_changed and not head_ref.startswith("upstream/"):
         print(
             "immutable upstream files changed outside an upstream/* branch: "

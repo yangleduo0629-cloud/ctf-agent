@@ -13,6 +13,13 @@ assert SPEC and SPEC.loader
 upstream_guard = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(upstream_guard)
 
+POLICY_SPEC = importlib.util.spec_from_file_location(
+    "check_pr_policy", ROOT / "scripts" / "check_pr_policy.py"
+)
+assert POLICY_SPEC and POLICY_SPEC.loader
+check_pr_policy = importlib.util.module_from_spec(POLICY_SPEC)
+POLICY_SPEC.loader.exec_module(check_pr_policy)
+
 
 class UpstreamContractTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -48,6 +55,37 @@ class UpstreamContractTests(unittest.TestCase):
             reachable.add(item)
             pending.extend(graph.get(item, ()))
         self.assertEqual(reachable, refs)
+
+    def test_product_dependency_sbom_refresh_does_not_require_upstream_branch(self) -> None:
+        self.assertEqual(
+            check_pr_policy.protected_changes(
+                {"pyproject.toml", "uv.lock", "sbom/upstreams.cdx.json"}
+            ),
+            [],
+        )
+        self.assertEqual(
+            check_pr_policy.protected_changes(
+                {"UPSTREAMS.lock.json", "sbom/upstreams.cdx.json"}
+            ),
+            ["UPSTREAMS.lock.json"],
+        )
+
+    def test_upstream_container_inputs_are_included_in_build_context(self) -> None:
+        dockerignore = (ROOT / ".dockerignore").read_text(encoding="utf-8").splitlines()
+        required_includes = {
+            "!pyproject.toml",
+            "!uv.lock",
+            "!README.md",
+            "!third_party/locks/hexstrike-requirements.lock.txt",
+            "!upstream/hexstrike-ai/hexstrike_mcp.py",
+            "!upstream/hexstrike-ai/hexstrike_server.py",
+            "!upstream/pentestgpt/README.md",
+            "!upstream/pentestgpt/pyproject.toml",
+            "!upstream/pentestgpt/uv.lock",
+            "!upstream/pentestgpt/pentestgpt_legacy/**",
+            "!upstream/pentestgpt/unified_agent/**",
+        }
+        self.assertTrue(required_includes.issubset(dockerignore))
 
 
 if __name__ == "__main__":

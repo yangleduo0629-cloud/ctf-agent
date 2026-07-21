@@ -4,10 +4,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
-COPY requirements.txt .
+COPY infra/wsl/api/requirements.txt .
 RUN pip install --no-cache-dir --requirement requirements.txt
-COPY app ./app
+COPY alembic.ini ./alembic.ini
+COPY migrations ./migrations
+COPY backend/__init__.py ./backend/__init__.py
+COPY backend/db ./backend/db
+COPY infra/wsl/api/app ./app
 
 USER 65532:65532
 EXPOSE 8080
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port 8080"]

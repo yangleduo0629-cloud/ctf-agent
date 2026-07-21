@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     opencode_zen_api_key: str = ""
 
     # Infra
+    database_url: str = "sqlite:///ctf-agent.db"
     sandbox_image: str = "ctf-sandbox"
     max_concurrent_challenges: int = 10
     max_attempts_per_challenge: int = 3
