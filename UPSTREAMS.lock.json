@@ -3,7 +3,7 @@
   "generated_at": "2026-07-21T00:00:00Z",
   "product": {
     "name": "ctf-agent",
-    "repository": "LOCAL_FORK",
+    "repository": "https://github.com/yangleduo0629-cloud/ctf-agent.git",
     "upstream_remote": "upstream",
     "default_branch": "main"
   },
