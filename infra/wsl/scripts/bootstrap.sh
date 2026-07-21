@@ -11,6 +11,18 @@ readonly UV_VERSION="0.8.3"
 readonly PNPM_VERSION="10.13.1"
 readonly KEYRING_DIR="/etc/apt/keyrings"
 
+proxy_url="${HTTPS_PROXY:-${https_proxy:-}}"
+if [[ -n ${proxy_url} ]]; then
+  install -d -m 0755 /etc/systemd/system/docker.service.d
+  cat > /etc/systemd/system/docker.service.d/proxy.conf <<EOF
+[Service]
+Environment="HTTP_PROXY=${proxy_url}"
+Environment="HTTPS_PROXY=${proxy_url}"
+Environment="NO_PROXY=localhost,127.0.0.1,::1,postgres,redis,api,web,litellm"
+EOF
+  systemctl daemon-reload
+fi
+
 install -d -m 0755 "${KEYRING_DIR}"
 apt-get update
 apt-get install -y --no-install-recommends \

@@ -55,3 +55,11 @@ def test_model_runtime_is_reserved_only() -> None:
     readme = (INFRA / "README.md").read_text(encoding="utf-8")
     assert "LOCAL_MODEL_API_BASE" in config
     assert "8001" in readme
+
+
+def test_build_proxy_is_not_baked_into_images() -> None:
+    services = load_compose()["services"]
+    for service_name in ("api", "web", "litellm"):
+        args = services[service_name]["build"]["args"]
+        assert set(args) == {"HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY"}
+        assert args["HTTP_PROXY"] == "${HTTP_PROXY:-}"

@@ -43,6 +43,17 @@ sudo infra/wsl/scripts/deploy.sh
 sudo infra/wsl/scripts/health-check.sh
 ```
 
+When a Windows TUN client keeps its HTTP proxy on loopback, start the adapter-scoped relay first:
+
+```powershell
+$proxy = .\infra\wsl\host\Start-WslProxyRelay.ps1
+wsl.exe -d Ubuntu-24.04 -u root -- env HTTP_PROXY=$proxy HTTPS_PROXY=$proxy `
+  /srv/ctf-platform/app/infra/wsl/scripts/bootstrap.sh
+```
+
+The relay binds only to the WSL virtual adapter. `bootstrap.sh` passes the same endpoint to the native
+Docker daemon; Compose passes standard proxy build arguments without writing the proxy into images.
+
 `deploy.sh` creates `infra/wsl/.env` with random local secrets and mode `0600`. The file is ignored by
 Git. It builds and starts PostgreSQL, Redis, FastAPI, React/Vite, and LiteLLM in one Compose project.
 
